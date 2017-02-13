@@ -1,0 +1,21 @@
+{
+  "name": "image-caption-generation",
+  "homepage": "https://github.com/adamzu/image-caption-generation",
+  "authors": [
+    "Adam Zucker <adamzu@gmail.com>"
+  ],
+  "description": "Final Project for CPSC 490",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^15.4.2"
+  }
+}

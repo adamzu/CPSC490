@@ -1,0 +1,22 @@
+{
+  "name": "image-caption-generation",
+  "version": "1.0.0",
+  "description": "Final project for CPSC 490",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamzu/image-caption-generation.git"
+  },
+  "author": "Adam Zucker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adamzu/image-caption-generation/issues"
+  },
+  "homepage": "https://github.com/adamzu/image-caption-generation#readme",
+  "dependencies": {
+    "bower": "1.8.0"
+  }
+}

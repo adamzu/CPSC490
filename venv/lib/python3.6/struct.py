@@ -1,1 +1,15 @@
-/usr/local/Cellar/python3/3.6.0/Frameworks/Python.framework/Versions/3.6/lib/python3.6/struct.py
+__all__ = [
+    # Functions
+    'calcsize', 'pack', 'pack_into', 'unpack', 'unpack_from',
+    'iter_unpack',
+
+    # Classes
+    'Struct',
+
+    # Exceptions
+    'error'
+    ]
+
+from _struct import *
+from _struct import _clearcache
+from _struct import __doc__
