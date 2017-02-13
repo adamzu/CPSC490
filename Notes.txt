@@ -1,0 +1,17 @@
+People:
+  Alex Berg, Tamara Berg - http://acberg.com/
+  Andrej Karpathy - http://cs.stanford.edu/people/karpathy/
+  Yejin Choi - http://homes.cs.washington.edu/~yejin/
+
+Papers:
+  Deep Visual-Semantic Alignments for Generating Image Descriptions -
+    http://cs.stanford.edu/people/karpathy/cvpr2015.pdf
+  Automatic Description Generation from Images: A Survey of Models, Datasets, and Evaluation Measures -
+    http://www.jair.org/media/4900/live-4900-9139-jair.pdf
+
+Clarifai - https://clarifai.com/
+Deep Learning Papers - http://clair.si.umich.edu/~radev/dl/dl.pdf
+ImageNET - https://arxiv.org/abs/1409.0575
+MSCoco - http://mscoco.org/
+OpenCV - http://opencv.org/
+Python Image Recognition - https://pythonprogramming.net/image-recognition-python/
