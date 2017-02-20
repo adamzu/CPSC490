@@ -1,6 +1,13 @@
 # image-caption-generation
 Final project for CPSC 490
 
+## To install:
+
+1. `pip install virtualenv`
+1. `virtualenv venv; source venv/bin/activate`
+1. `pip install -r requirements.txt`
+1. `npm install`
+
 ## To run:
 Run `./setup.sh` or:
 
