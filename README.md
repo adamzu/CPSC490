@@ -7,6 +7,7 @@ Final project for CPSC 490
 1. `virtualenv venv; source venv/bin/activate`
 1. `pip install -r requirements.txt`
 1. `npm install`
+1. `bower install`
 
 ## To run:
 Run `./setup.sh` or:
