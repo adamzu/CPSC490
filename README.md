@@ -21,4 +21,4 @@ In one terminal window, run `./setup.sh` or:
 1. `flask run`
 
 ## To access from ssh connection:
-While the Flask server and webpack are running, run `lt --port=5000` in a separate terminal window (ensure [localtunnel](https://localtunnel.github.io/www/) is installed first). Then, open the returned link in your web browser.
+While the Flask server and Webpack are running, run `lt --port=5000` in a separate terminal window (ensure [localtunnel](https://localtunnel.github.io/www/) is installed first). Then, open the returned link in your web browser.
