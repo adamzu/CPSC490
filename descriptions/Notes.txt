@@ -15,4 +15,5 @@ ImageNET - https://arxiv.org/abs/1409.0575
 MSCoco - http://mscoco.org/
 OpenCV - http://opencv.org/
 Python Image Recognition - https://pythonprogramming.net/image-recognition-python/
-Wordnet - https://wordnet.princeton.edu/ 
+Wordnet - https://wordnet.princeton.edu/
+Stanford class - http://cs231n.stanford.edu/index.html
