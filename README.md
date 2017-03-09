@@ -10,6 +10,7 @@ Ensure `python3` and `pip3` are installed. Then do the following:
 1. `npm install`
 1. `bower install`
 1. Replace the line with `PATH` in `~/.profile` with the following: `PATH="$HOME/bin:$HOME/.local/bin:./node_modules/.bin:$PATH"`
+1. Install `pycoco` package (instructions [here](https://github.com/pdollar/coco/))
 
 ## To run:
 In one terminal window, run `./setup.sh` or:
