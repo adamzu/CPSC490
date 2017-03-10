@@ -8,7 +8,9 @@ const Home = React.createClass({
     return (
       <div>
         <h1 className="home">Image Caption Generation</h1>
-        <Dropzone />
+        <Dropzone accept="image/jpg">
+          {/* <img src=""/> */}
+        </Dropzone>
         <Button> Get Caption </Button>
       </div>
     );
