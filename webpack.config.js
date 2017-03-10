@@ -1,11 +1,12 @@
 const webpack = require('webpack');
+
 module.exports = {
   entry: [
-    "./project/static/js/application.js"
+    "./project/static/js/application.js",
   ],
   output: {
     path: __dirname + '/project/static/js/',
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   module: {
     loaders: [
@@ -13,12 +14,11 @@ module.exports = {
         test: /\.js?$/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react'],
         },
-        exclude: /node_modules/
-      }
+        exclude: /node_modules/,
+      },
     ]
   },
-  plugins: [
-  ]
+  plugins: [],
 };
