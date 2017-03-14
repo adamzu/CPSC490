@@ -1,3 +1,5 @@
-.home {
-  
+.content {
+  position: absolute;
+  top: 50px;
+  padding: 5px; 
 }

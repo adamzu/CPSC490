@@ -10,8 +10,9 @@ class Home extends React.Component {
     return (
       <div>
         <Toolbar />
-        <h1 className="home">Image Caption Generation</h1>
-        <Uploader />
+        <div className="content">
+          <Uploader />
+        </div>
       </div>
     );
   }
