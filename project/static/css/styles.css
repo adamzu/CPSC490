@@ -1,5 +1,10 @@
 .content {
+  padding: 5px;
   position: absolute;
   top: 50px;
-  padding: 5px; 
+}
+
+.thumbnail img{
+  height: 200px;
+  width: 200px;
 }

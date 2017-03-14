@@ -1,4 +1,5 @@
 const Dropzone = require('react-dropzone');
+const ImagePreview = require('ImagePreview.react');
 const React = require('react');
 
 import { Button } from 'react-bootstrap';
@@ -13,9 +14,10 @@ class Uploader extends React.Component {
     }
   }
 
-  onDrop(images) {
-    this.setState({
-      images : images,
+  onDrop(image) {
+    this.setState((state) => {
+      state.images = state.images.concat(image);
+      return state;
     });
   }
 
@@ -24,7 +26,6 @@ class Uploader extends React.Component {
       <div>
         <Dropzone
           accept="image/jpeg"
-          multiple={false}
           onDrop={this.onDrop}
           ref={(dropzone) => {this.dropzone = dropzone}}>
         </Dropzone>
@@ -32,7 +33,7 @@ class Uploader extends React.Component {
           this.state.images.length > 0
             ? this.state.images.map((image) => {
               return (
-                <img height="200px" width="200px" key={image} src={image.preview}/>
+                <ImagePreview src={image.preview} key={image.name}/>
               );
             })
             : null
