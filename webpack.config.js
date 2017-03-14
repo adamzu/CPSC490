@@ -23,8 +23,9 @@ module.exports = {
   },
   plugins: [],
   resolve: {
-    root: [
+    modules: [
       path.resolve('./project/static/js/'),
+      path.resolve('./node_modules/'),
     ]
   },
 };
