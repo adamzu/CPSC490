@@ -1,4 +1,4 @@
-const Home = require('./Home.react');
+const Home = require('Home.react');
 const React = require('react');
 const ReactDOM = require('react-dom');
 

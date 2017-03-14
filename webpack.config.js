@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
@@ -21,4 +22,9 @@ module.exports = {
     ]
   },
   plugins: [],
+  resolve: {
+    root: [
+      path.resolve('./project/static/js/'),
+    ]
+  },
 };
