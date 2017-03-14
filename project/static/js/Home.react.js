@@ -7,14 +7,15 @@ class Home extends React.Component {
 
   constructor(props) {
     super(props)
+    this.onDrop = this.onDrop.bind(this);
     this.state = {
       images: [],
     }
   }
 
-  onDrop(image) {
+  onDrop(images) {
     this.setState({
-      files: image
+      images : images,
     });
   }
 
@@ -23,12 +24,21 @@ class Home extends React.Component {
       <div>
         <h1 className="home">Image Caption Generation</h1>
         <Dropzone
-          accept="image/jpg"
+          accept="image/jpeg"
+          multiple={false}
           onDrop={this.onDrop}
-          ref="dropzone">
-          {/* <img src=""/> */}
+          ref={(dropzone) => {this.dropzone = dropzone}}>
         </Dropzone>
-        <Button> Get Caption </Button>
+        {
+          this.state.images.length > 0
+            ? this.state.images.map((image) => {
+              return (
+                <img height="200px" width="200px" key={image} src={image.preview}/>
+              );
+            })
+            : null
+        }
+        <Button>Get Caption</Button>
       </div>
     );
   }
