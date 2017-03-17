@@ -29,7 +29,7 @@ class Uploader extends React.Component {
           onDrop={this.onDrop}
           ref={(dropzone) => {this.dropzone = dropzone}}>
           <div>
-            {/* <Glyphicon glyph="align-left" /> */}
+            <Glyphicon glyph="upload" />
             Drag and drop image here (or click to browse)...
           </div>
         </Dropzone>
