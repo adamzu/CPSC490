@@ -2,7 +2,7 @@ const Dropzone = require('react-dropzone');
 const ImagePreview = require('ImagePreview.react');
 const React = require('react');
 
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 class Uploader extends React.Component {
 
@@ -28,6 +28,10 @@ class Uploader extends React.Component {
           accept="image/jpeg"
           onDrop={this.onDrop}
           ref={(dropzone) => {this.dropzone = dropzone}}>
+          <div>
+            {/* <Glyphicon glyph="align-left" /> */}
+            Drag and drop image here (or click to browse)...
+          </div>
         </Dropzone>
         {
           this.state.images.length > 0
