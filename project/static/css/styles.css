@@ -4,6 +4,20 @@
   top: 50px;
 }
 
+.dropzone-placeholder {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.dropzone-placeholder .glyphicon {
+  font-size: 80px;
+}
+
 .thumbnail img{
   height: 200px;
   width: 200px;
