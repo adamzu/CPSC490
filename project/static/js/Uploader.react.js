@@ -23,12 +23,13 @@ class Uploader extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="dropzone">
         <Dropzone
-          accept="image/jpeg"
+          accept="image/*"
           onDrop={this.onDrop}
-          ref={(dropzone) => {this.dropzone = dropzone}}>
-          <div className="dropzone-placeholder">
+          ref={(dropzone) => {this.dropzone = dropzone}}
+        >
+          <div className="placeholder">
             <Glyphicon glyph="cloud-upload" /><br />
             Drag and drop image here <br />
             or <br />
