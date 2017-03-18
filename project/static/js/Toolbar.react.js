@@ -1,47 +1,44 @@
 const React = require('react');
-const TABS = ['Home', 'Abstract', 'Proposal', 'Report'];
 
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
+
+const TABS = ['Home', 'Abstract', 'Proposal', 'Report'];
 
 class Toolbar extends React.Component {
 
   constructor(props) {
     super(props)
-    this.onClick = this.onClick.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.state = {
-      activeTab: TABS[0],
+      activeKey: 0,
     };
   }
 
   isActiveTab(key) {
-    return this.state.activeTab === key;
+    return this.state.activeKey === key;
   }
 
-  onClick(event) {
-    let tab = event.target.innerHTML;
+  handleSelect(eventKey) {
     this.setState({
-      activeTab: tab,
+      activeKey: eventKey,
     });
   }
-
-  // TODO: add active conditional based on which tab selected
 
   render() {
     return (
       <Navbar fixedTop inverse>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Image Caption Generation</a>
+            <a href=""> Image Caption Generation</a>
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav>
+        <Nav onSelect={this.handleSelect}>
           {TABS.map((tab, index) => {
             return (
               <NavItem
-                active={this.isActiveTab(tab)}
+                active={this.isActiveTab(index)}
                 eventKey={index}
                 key={index}
-                onClick={this.onClick}
               >
                 {tab}
               </NavItem>
