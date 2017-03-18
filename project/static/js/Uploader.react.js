@@ -10,7 +10,7 @@ class Uploader extends React.Component {
     super(props)
     this.onDrop = this.onDrop.bind(this);
     this.state = {
-      image: "",
+      image: null,
     }
   }
 
@@ -38,7 +38,7 @@ class Uploader extends React.Component {
           </div>
         </Dropzone>
         {
-          this.state.image !== ""
+          this.state.image !== null
             ? <ImagePreview src={this.state.image.preview} key={this.state.image.name}/>
             : null
         }
