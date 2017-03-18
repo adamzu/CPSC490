@@ -10,16 +10,17 @@ class Uploader extends React.Component {
     super(props)
     this.onDrop = this.onDrop.bind(this);
     this.state = {
-      images: [],
+      image: "",
     }
   }
 
   onDrop(image) {
-    this.setState((state) => {
-      state.images = state.images.concat(image);
-      return state;
+    this.setState({
+      image: image[0],
     });
   }
+
+  // TODO: take out button and move preview to its own component
 
   render() {
     return (
@@ -37,15 +38,10 @@ class Uploader extends React.Component {
           </div>
         </Dropzone>
         {
-          this.state.images.length > 0
-            ? this.state.images.map((image) => {
-              return (
-                <ImagePreview src={image.preview} key={image.name}/>
-              );
-            })
+          this.state.image !== ""
+            ? <ImagePreview src={this.state.image.preview} key={this.state.image.name}/>
             : null
         }
-        <Button>Get Caption</Button>
       </div>
     );
   }
