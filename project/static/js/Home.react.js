@@ -8,7 +8,7 @@ const TABS = ['Home', 'Abstract', 'Proposal', 'Report'];
 class Home extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.handleSelect = this.handleSelect.bind(this);
     this.state = {
       activeTabKey: 0,

@@ -5,7 +5,7 @@ import { Nav, Navbar, NavItem } from 'react-bootstrap';
 class Toolbar extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   isActiveTab(key) {

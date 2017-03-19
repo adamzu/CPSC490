@@ -5,7 +5,7 @@ import { Thumbnail } from 'react-bootstrap';
 class ImagePreview extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {

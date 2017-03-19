@@ -7,7 +7,7 @@ import { Button, Glyphicon } from 'react-bootstrap';
 class Uploader extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.onDrop = this.onDrop.bind(this);
     this.state = {
       image: null,
