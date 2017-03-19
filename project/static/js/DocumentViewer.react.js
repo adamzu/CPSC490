@@ -40,8 +40,7 @@ class DocumentViewer extends React.Component {
     return `/static/documents/${this.props.tab}.pdf`;
   }
 
-  // TODO: figure out what to do with scroll (alternative to panel?)
-  // TODO: figure out what to do with pagination
+  // TODO: make extra div with pagination
   // TODO: take spinner out into component
 
   render() {
@@ -51,30 +50,27 @@ class DocumentViewer extends React.Component {
           this.state.totalPages !== 0
             ? <Pagination
                 activePage={this.state.currentPage}
+                boundaryLinks
                 bsSize="medium"
+                ellipsis
                 first
                 items={this.state.totalPages}
                 last
+                maxButtons={5}
                 next
                 onSelect={this.handleSelect}
                 prev
               />
             : null
         }
-        <Panel
-          className="viewer"
-          header={this.props.tab}
-        >
-          <ReactPDF
-            className="pdf"
-            file={this.getDocumentPath()}
-            loading={<img src="/static/images/spinner.gif" />}
-            onDocumentError={this.onDocumentError}
-            onDocumentLoad={this.onDocumentLoad}
-            pageIndex={this.state.currentPageIndex}
-            scale={1.0}
-          />
-        </Panel>
+        <ReactPDF
+          file={this.getDocumentPath()}
+          loading={<img src="/static/images/spinner.gif" />}
+          onDocumentError={this.onDocumentError}
+          onDocumentLoad={this.onDocumentLoad}
+          pageIndex={this.state.currentPageIndex}
+          scale={1.0}
+        />
       </div>
     );
   }

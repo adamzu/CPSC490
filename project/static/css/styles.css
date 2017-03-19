@@ -31,16 +31,13 @@
 }
 
 .viewer-container {
-  width: 55%;
-}
-
-.viewer {
-  height: 100%;
-  overflow: auto;
-}
-
-.viewer .panel-body {
   align-items: center;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 5px;
+  border-style: solid;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  overflow: auto;
+  width: 55%;
 }
