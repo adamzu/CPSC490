@@ -2,26 +2,14 @@ const React = require('react');
 
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 
-const TABS = ['Home', 'Abstract', 'Proposal', 'Report'];
-
 class Toolbar extends React.Component {
 
   constructor(props) {
     super(props)
-    this.handleSelect = this.handleSelect.bind(this);
-    this.state = {
-      activeKey: 0,
-    };
   }
 
   isActiveTab(key) {
-    return this.state.activeKey === key;
-  }
-
-  handleSelect(eventKey) {
-    this.setState({
-      activeKey: eventKey,
-    });
+    return this.props.activeTabKey === key;
   }
 
   render() {
@@ -32,8 +20,8 @@ class Toolbar extends React.Component {
             <a href=""> Image Caption Generation</a>
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav onSelect={this.handleSelect}>
-          {TABS.map((tab, index) => {
+        <Nav onSelect={this.props.handleSelect}>
+          {this.props.tabs.map((tab, index) => {
             return (
               <NavItem
                 active={this.isActiveTab(index)}
@@ -50,3 +38,8 @@ class Toolbar extends React.Component {
   }
 }
 module.exports = Toolbar
+
+Toolbar.propTypes = {
+  handleSelect: React.PropTypes.func.isRequired,
+  tabs: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+}
