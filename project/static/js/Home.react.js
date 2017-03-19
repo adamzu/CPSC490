@@ -3,6 +3,7 @@ const Toolbar = require('Toolbar.react');
 const Uploader = require('Uploader.react');
 
 import { Button } from 'react-bootstrap';
+import ReactPDF from 'react-pdf';
 
 const TABS = ['Home', 'Abstract', 'Proposal', 'Report'];
 
@@ -16,12 +17,13 @@ class Home extends React.Component {
     };
   }
 
+  // TODO: separate PDF out into separate component
   getContent() {
     let tab = TABS[this.state.activeTabKey];
     if (tab === 'Home') {
       return <Uploader />;
     }
-    return <h1>TODO: {tab}</h1>;
+    return <ReactPDF file={`/static/documents/${tab}.pdf`} />;
   }
 
   handleSelect(eventKey) {
