@@ -1,6 +1,5 @@
 .DS_Store
 __pycache__
-bower_components
 bundle.js
 node_modules
 venv
