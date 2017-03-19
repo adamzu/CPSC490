@@ -31,9 +31,15 @@
 }
 
 .viewer-container {
-  
+  width: 55%;
 }
 
 .viewer {
+  height: 100%;
+  overflow: auto;
+}
 
+.viewer .panel-body {
+  display: flex;
+  justify-content: center;
 }
