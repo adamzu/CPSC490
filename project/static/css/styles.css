@@ -4,11 +4,11 @@
   flex-direction: row;
   justify-content: center;
   left: 0px;
-  margin: 15px;
+  margin: 65px 15px 15px 15px;
   padding: 5px;
   position: absolute;
+  top: 0px;
   right: 0px;
-  top: 50px;
 }
 
 .dropzone .placeholder {
@@ -25,7 +25,15 @@
   font-size: 80px;
 }
 
-.thumbnail img{
+.thumbnail img {
   height: 200px;
   width: 200px;
+}
+
+.viewer-container {
+  
+}
+
+.viewer {
+
 }

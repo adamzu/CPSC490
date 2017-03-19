@@ -20,8 +20,7 @@ class Uploader extends React.Component {
     });
   }
 
-  // TODO: take out button and move preview to its own component
-
+  // TODO: move preview
   render() {
     return (
       <div className="dropzone">

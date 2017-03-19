@@ -1,9 +1,7 @@
+const DocumentViewer = require('DocumentViewer.react');
 const React = require('react');
 const Toolbar = require('Toolbar.react');
 const Uploader = require('Uploader.react');
-
-import { Button } from 'react-bootstrap';
-import ReactPDF from 'react-pdf';
 
 const TABS = ['Home', 'Abstract', 'Proposal', 'Report'];
 
@@ -23,7 +21,7 @@ class Home extends React.Component {
     if (tab === 'Home') {
       return <Uploader />;
     }
-    return <ReactPDF file={`/static/documents/${tab}.pdf`} />;
+    return <DocumentViewer tab={tab} />;
   }
 
   handleSelect(eventKey) {

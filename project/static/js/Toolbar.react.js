@@ -19,20 +19,23 @@ class Toolbar extends React.Component {
           <Navbar.Brand>
             <a href=""> Image Caption Generation</a>
           </Navbar.Brand>
+          <Navbar.Toggle />
         </Navbar.Header>
-        <Nav onSelect={this.props.handleSelect}>
-          {this.props.tabs.map((tab, index) => {
-            return (
-              <NavItem
-                active={this.isActiveTab(index)}
-                eventKey={index}
-                key={index}
-              >
-                {tab}
-              </NavItem>
-            );
-          })}
-        </Nav>
+        <Navbar.Collapse>
+          <Nav onSelect={this.props.handleSelect}>
+            {this.props.tabs.map((tab, index) => {
+              return (
+                <NavItem
+                  active={this.isActiveTab(index)}
+                  eventKey={index}
+                  key={index}
+                >
+                  {tab}
+                </NavItem>
+              );
+            })}
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }
