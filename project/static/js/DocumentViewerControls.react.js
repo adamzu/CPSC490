@@ -8,7 +8,6 @@ class DocumentViewerControls extends React.Component {
     super(props);
   }
 
-  // TODO: make extra div with pagination
   render() {
     return (
       <Pagination

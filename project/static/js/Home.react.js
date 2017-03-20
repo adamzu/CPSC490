@@ -15,7 +15,6 @@ class Home extends React.Component {
     };
   }
 
-  // TODO: separate PDF out into separate component
   getContent() {
     let tab = TABS[this.state.activeTabKey];
     if (tab === 'Home') {
