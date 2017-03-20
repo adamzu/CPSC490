@@ -1,3 +1,4 @@
+const DocumentViewerControls = require('DocumentViewerControls.react');
 const React = require('react');
 
 import { Pagination, Panel } from 'react-bootstrap';
@@ -14,7 +15,15 @@ class DocumentViewer extends React.Component {
       currentPageIndex: 0,
       currentPage: 1,
       totalPages: 0,
+      width: 0,
     };
+  }
+
+  componentDidMount() {
+    let width = document.getElementById('a').clientWidth;
+    this.setState({
+      width: width,
+    });
   }
 
   onDocumentLoad({total}) {
@@ -42,24 +51,16 @@ class DocumentViewer extends React.Component {
 
   // TODO: make extra div with pagination
   // TODO: take spinner out into component
-
   render() {
     return (
-      <div className="viewer-container">
+      <div className="viewer-container" id="a">
         {
           this.state.totalPages !== 0
-            ? <Pagination
-                activePage={this.state.currentPage}
-                boundaryLinks
-                bsSize="medium"
-                ellipsis
-                first
-                items={this.state.totalPages}
-                last
-                maxButtons={5}
-                next
-                onSelect={this.handleSelect}
-                prev
+            ?
+              <DocumentViewerControls
+                currentPage={this.state.currentPage}
+                handleSelect={this.handleSelect}
+                totalPages={this.state.totalPages}
               />
             : null
         }
@@ -69,7 +70,7 @@ class DocumentViewer extends React.Component {
           onDocumentError={this.onDocumentError}
           onDocumentLoad={this.onDocumentLoad}
           pageIndex={this.state.currentPageIndex}
-          scale={1.0}
+          width={this.state.width}
         />
       </div>
     );
