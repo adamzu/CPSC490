@@ -18,7 +18,7 @@ class DocumentViewer extends React.Component {
   }
 
   componentDidMount() {
-    let width = document.getElementById('a').clientWidth;
+    let width = document.getElementById('pane').clientWidth;
     this.setState({
       width: width,
     });
@@ -47,11 +47,9 @@ class DocumentViewer extends React.Component {
     return `/static/documents/${this.props.tab}.pdf`;
   }
 
-  // TODO: make extra div with pagination
-  // TODO: take spinner out into component
   render() {
     return (
-      <div className="viewer" id="a">
+      <div className="viewer">
         {
           this.state.totalPages !== 0
             ?

@@ -14,6 +14,7 @@ class DocumentViewerPane extends React.Component {
       <ReactPDF
         file={this.props.file}
         loading={<div className="spinner"><Spinner /></div>}
+        onClick={this.onClick}
         onDocumentError={this.props.onDocumentError}
         onDocumentLoad={this.props.onDocumentLoad}
         pageIndex={this.props.currentPageIndex}

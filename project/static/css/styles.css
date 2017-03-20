@@ -31,17 +31,38 @@
 }
 
 .viewer {
-  align-items: center;
   border-width: 1px;
   border-color: black;
   border-radius: 5px;
   border-style: solid;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  width: 55%;
+  position: relative;
+  width: 65%;
 }
 
-.spinner {
-  
+.viewer .controls {
+  background-color: gray;
+  height: 50px;
+  position: absolute;
+  top: 0px;
+  opacity: 0.5;
+  width: 100%;
+}
+
+.viewer .pane {
+  bottom: 0px;
+  overflow: auto;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+}
+
+.viewer .spinner {
+  align-items: center;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 0px;
+  width: 100%;
 }
