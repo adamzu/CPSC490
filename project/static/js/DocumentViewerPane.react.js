@@ -9,11 +9,16 @@ class DocumentViewerPane extends React.Component {
     super(props);
   }
 
+  getDocumentPath() {
+    return `/static/documents/${this.props.file}.pdf`;
+  }
+
   render() {
     return (
       <ReactPDF
-        file={this.props.file}
-        loading={<div className="spinner"><Spinner /></div>}
+        error={<div className="status">Could not load {this.props.file}</div>}
+        file={this.getDocumentPath()}
+        loading={<div className="status"><Spinner /></div>}
         onClick={this.onClick}
         onDocumentError={this.props.onDocumentError}
         onDocumentLoad={this.props.onDocumentLoad}

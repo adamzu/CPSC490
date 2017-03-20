@@ -43,10 +43,6 @@ class DocumentViewer extends React.Component {
     });
   }
 
-  getDocumentPath() {
-    return `/static/documents/${this.props.tab}.pdf`;
-  }
-
   render() {
     return (
       <div className="viewer">
@@ -64,7 +60,7 @@ class DocumentViewer extends React.Component {
         }
         <div className="pane" id="pane">
           <DocumentViewerPane
-            file={this.getDocumentPath()}
+            file={this.props.tab}
             onDocumentError={this.onDocumentError}
             onDocumentLoad={this.onDocumentLoad}
             currentPageIndex={this.state.currentPageIndex}

@@ -39,9 +39,13 @@
 }
 
 .viewer .controls {
+  align-items: center;
   background-color: white;
   box-shadow: 0px 2px 2px lightgray;
+  display: flex;
+  flex-direction: column;
   height: 50px;
+  justify-content: center;
   position: absolute;
   top: 0px;
   width: 100%;
@@ -57,12 +61,13 @@
   width: 100%;
 }
 
-.viewer .spinner {
+.viewer .pane .status {
   align-items: center;
   bottom: 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 50px;
   position: absolute;
   top: 0px;
   width: 100%;
