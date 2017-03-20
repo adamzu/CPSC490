@@ -1,4 +1,5 @@
 const React = require('react');
+const Spinner = require('Spinner.react');
 
 import ReactPDF from 'react-pdf';
 
@@ -12,7 +13,7 @@ class DocumentViewerPane extends React.Component {
     return (
       <ReactPDF
         file={this.props.file}
-        loading={<img src="/static/images/spinner.gif" />}
+        loading={<div className="spinner"><Spinner /></div>}
         onDocumentError={this.props.onDocumentError}
         onDocumentLoad={this.props.onDocumentLoad}
         pageIndex={this.props.currentPageIndex}

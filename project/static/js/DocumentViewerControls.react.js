@@ -9,7 +9,6 @@ class DocumentViewerControls extends React.Component {
   }
 
   // TODO: make extra div with pagination
-  // TODO: take spinner out into component
   render() {
     return (
       <Pagination
