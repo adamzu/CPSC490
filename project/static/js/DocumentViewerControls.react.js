@@ -1,6 +1,6 @@
 const React = require('react');
 
-import { Pagination, Panel } from 'react-bootstrap';
+import { Pagination } from 'react-bootstrap';
 
 class DocumentViewerControls extends React.Component {
 

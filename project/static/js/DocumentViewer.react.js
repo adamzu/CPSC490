@@ -1,8 +1,6 @@
 const DocumentViewerControls = require('DocumentViewerControls.react');
+const DocumentViewerPane = require('DocumentViewerPane.react');
 const React = require('react');
-
-import { Pagination, Panel } from 'react-bootstrap';
-import ReactPDF from 'react-pdf';
 
 class DocumentViewer extends React.Component {
 
@@ -53,25 +51,28 @@ class DocumentViewer extends React.Component {
   // TODO: take spinner out into component
   render() {
     return (
-      <div className="viewer-container" id="a">
+      <div className="viewer" id="a">
         {
           this.state.totalPages !== 0
             ?
-              <DocumentViewerControls
-                currentPage={this.state.currentPage}
-                handleSelect={this.handleSelect}
-                totalPages={this.state.totalPages}
-              />
+              <div className="controls">
+                <DocumentViewerControls
+                  currentPage={this.state.currentPage}
+                  handleSelect={this.handleSelect}
+                  totalPages={this.state.totalPages}
+                />
+              </div>
             : null
         }
-        <ReactPDF
-          file={this.getDocumentPath()}
-          loading={<img src="/static/images/spinner.gif" />}
-          onDocumentError={this.onDocumentError}
-          onDocumentLoad={this.onDocumentLoad}
-          pageIndex={this.state.currentPageIndex}
-          width={this.state.width}
-        />
+        <div className="pane" id="pane">
+          <DocumentViewerPane
+            file={this.getDocumentPath()}
+            onDocumentError={this.onDocumentError}
+            onDocumentLoad={this.onDocumentLoad}
+            currentPageIndex={this.state.currentPageIndex}
+            width={this.state.width}
+          />
+        </div>
       </div>
     );
   }
