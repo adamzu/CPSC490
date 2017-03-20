@@ -33,26 +33,27 @@
 .viewer {
   border-width: 1px;
   border-color: black;
-  border-radius: 5px;
   border-style: solid;
   position: relative;
   width: 65%;
 }
 
 .viewer .controls {
-  background-color: gray;
+  background-color: white;
+  box-shadow: 0px 2px 2px lightgray;
   height: 50px;
   position: absolute;
   top: 0px;
-  opacity: 0.5;
   width: 100%;
+  z-index: 10;
 }
 
 .viewer .pane {
   bottom: 0px;
+  margin-top: 50px;
   overflow: auto;
   position: absolute;
-  top: 50px;
+  top: 0px;
   width: 100%;
 }
 
