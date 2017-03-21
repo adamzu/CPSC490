@@ -28,6 +28,7 @@
     "react-bootstrap": "^0.30.8",
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.11.0",
-    "react-pdf": "1.6.1"
+    "react-pdf": "1.6.1",
+    "superagent": "3.5.1"
   }
 }
