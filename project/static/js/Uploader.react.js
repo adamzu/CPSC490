@@ -3,6 +3,7 @@ const ImagePreview = require('ImagePreview.react');
 const React = require('react');
 
 import { Button, Glyphicon } from 'react-bootstrap';
+import request from 'superagent';
 
 class Uploader extends React.Component {
 
@@ -14,11 +15,19 @@ class Uploader extends React.Component {
     }
   }
 
-  onDrop(image) {
+  onDrop(images) {
     // TODO: use superagent to send to Flask and handle image manipulation there
+    let image = images[0];
     this.setState({
-      image: image[0],
+      image: image,
     });
+    request.post('/upload')
+      .attach('image', image, image.name)
+      .end((error, result) => {
+        // TODO: replace with actual function that displays preview
+        console.log(error);
+        console.log(result);
+      });
   }
 
   // TODO: move preview
