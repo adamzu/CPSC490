@@ -16,7 +16,6 @@ class Uploader extends React.Component {
   }
 
   onDrop(images) {
-    // TODO: use superagent to send to Flask and handle image manipulation there
     let image = images[0];
     this.setState({
       image: image,
@@ -33,11 +32,11 @@ class Uploader extends React.Component {
   // TODO: move preview
   render() {
     return (
-      <div className="dropzone">
+      <div className="dropzone-container">
         <Dropzone
           accept="image/*"
+          className="dropzone"
           onDrop={this.onDrop}
-          ref={(dropzone) => {this.dropzone = dropzone}}
         >
           <div className="placeholder">
             <Glyphicon glyph="cloud-upload" /><br />

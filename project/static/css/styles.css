@@ -1,14 +1,27 @@
 .content {
   bottom: 0px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   left: 0px;
-  margin: 65px 15px 15px 15px;
+  margin: 15px;
+  overflow: auto;
   padding: 5px;
   position: absolute;
-  top: 0px;
   right: 0px;
+  top: 50px;
+}
+
+.dropzone-container {
+  margin: auto;
+}
+
+.dropzone {
+  border-color: rgb(102, 102, 102);
+  border-radius: 5px;
+  border-style: dashed;
+  border-width: 2px;
+  height: 350px;
+  width: 350px;
 }
 
 .dropzone .placeholder {
