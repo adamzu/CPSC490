@@ -30,6 +30,7 @@ class DocumentViewer extends React.Component {
     });
   }
 
+  // TODO: fix setState issue
   onDocumentError() {
     this.setState({
       totalPages: 0,

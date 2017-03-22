@@ -10,6 +10,7 @@ class ImageCaptioner extends React.Component {
   constructor(props) {
     super(props);
     this.onDropAccepted = this.onDropAccepted.bind(this);
+    this.request = null;
     this.state = {
       droppedImage: null,
       processedImage: null,
@@ -21,12 +22,13 @@ class ImageCaptioner extends React.Component {
     this.setState({
       droppedImage: droppedImage,
     });
-    request.post('/upload')
+    this.request = request.post('/upload')
       .attach('image', droppedImage, droppedImage.name)
       .timeout({
         deadline: 60000,
         response: 5000,
       })
+      // TODO: fix setState issue
       .end((error, result) => {
         if (error || !result.ok) {
           console.log(error);
@@ -37,6 +39,17 @@ class ImageCaptioner extends React.Component {
           });
         }
       });
+  }
+
+  componentDidMount() {
+
+  }
+
+  componentWillUnmount() {
+    if (this.request !== null) {
+      this.request.abort();
+      this.request = null;
+    }
   }
 
   render() {
