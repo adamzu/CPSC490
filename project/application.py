@@ -1,5 +1,8 @@
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, render_template, request, send_file
+from io import BytesIO
 from PIL import ExifTags, Image
+
+import base64
 
 app = Flask(__name__)
 
@@ -15,17 +18,20 @@ def upload():
     if exif:
         print(exif)
         image = get_oriented_image(image, exif)
-    # TODO: remove show eventually
-    #  image.show()
-    image.close()
     # TODO: return image
-    return "hello"
+    return send_image(image)
 
 if __name__ == "__main__":
     app.run()
 
 # TODO: put in separate file and clean up
-# TODO: do more with EXIF data
+def send_image(image):
+    image_io = BytesIO()
+    image.save(image_io, 'JPEG')
+    image.close()
+    image_io.seek(0)
+    return 'data:image/jpeg;base64,' + base64.b64encode(image_io.getvalue()).decode('ascii')
+
 def get_exif_data(image):
     try:
         exif_data = image._getexif()
@@ -37,6 +43,7 @@ def get_exif_data(image):
     except (AttributeError, KeyError, IndexError):
         return false
 
+# TODO: do more with EXIF data
 def get_oriented_image(image, exif):
     if exif['Orientation'] == 3:
         image = image.rotate(180, expand=True)

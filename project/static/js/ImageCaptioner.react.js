@@ -1,6 +1,7 @@
 const ImageUploader = require('ImageUploader.react');
 const ImagePreview = require('ImagePreview.react');
 const React = require('react');
+const Spinner = require('Spinner.react');
 
 import request from 'superagent';
 
@@ -10,41 +11,45 @@ class ImageCaptioner extends React.Component {
     super(props);
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.state = {
-      image: null,
+      droppedImage: null,
+      processedImage: null,
     }
   }
 
-  onDropAccepted(images) {
-    let image = images[0];
+  onDropAccepted(droppedImages) {
+    let droppedImage = droppedImages[0];
     this.setState({
-      image: image,
+      droppedImage: droppedImage,
     });
     request.post('/upload')
-      .attach('image', image, image.name)
+      .attach('image', droppedImage, droppedImage.name)
       .timeout({
         deadline: 60000,
         response: 5000,
       })
-      // TODO: add abort
       .end((error, result) => {
-        // TODO: replace with actual function that displays preview
-        console.log(error);
-        console.log(result);
+        if (error || !result.ok) {
+          console.log(error);
+        } else {
+          console.log(result);
+          this.setState({
+            processedImage: result.text
+          });
+        }
       });
   }
 
-  // TODO: move preview
   render() {
     return (
       <div className="captioner-container">
-        <ImageUploader onDropAccepted={this.onDropAccepted}/>
         {
-          this.state.image !== null
-            ? <ImagePreview
-                key={this.state.image.name}
-                src={this.state.image.preview}
-              />
-            : null
+          this.state.droppedImage === null
+            ? <ImageUploader onDropAccepted={this.onDropAccepted}/>
+            : this.state.processedImage === null
+              ? <Spinner />
+              : <ImagePreview
+                  src={this.state.processedImage}
+                />
         }
       </div>
     );
