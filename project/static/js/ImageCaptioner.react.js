@@ -1,21 +1,20 @@
-const Dropzone = require('react-dropzone');
+const ImageUploader = require('ImageUploader.react');
 const ImagePreview = require('ImagePreview.react');
 const React = require('react');
 
-import { Button, Glyphicon } from 'react-bootstrap';
 import request from 'superagent';
 
-class Uploader extends React.Component {
+class ImageCaptioner extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onDrop = this.onDrop.bind(this);
+    this.onDropAccepted = this.onDropAccepted.bind(this);
     this.state = {
       image: null,
     }
   }
 
-  onDrop(images) {
+  onDropAccepted(images) {
     let image = images[0];
     this.setState({
       image: image,
@@ -37,19 +36,8 @@ class Uploader extends React.Component {
   // TODO: move preview
   render() {
     return (
-      <div className="uploader-container">
-        <Dropzone
-          accept="image/*"
-          className="dropzone"
-          onDrop={this.onDrop}
-        >
-          <div className="placeholder">
-            <Glyphicon glyph="cloud-upload" /><br />
-            Drag and drop image here<br />
-            or<br />
-            Click to select a file to upload
-          </div>
-        </Dropzone>
+      <div className="captioner-container">
+        <ImageUploader onDropAccepted={this.onDropAccepted}/>
         {
           this.state.image !== null
             ? <ImagePreview
@@ -62,4 +50,4 @@ class Uploader extends React.Component {
     );
   }
 }
-module.exports = Uploader
+module.exports = ImageCaptioner

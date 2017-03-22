@@ -1,7 +1,7 @@
 const DocumentViewer = require('DocumentViewer.react');
+const ImageCaptioner = require('ImageCaptioner.react');
 const React = require('react');
 const Toolbar = require('Toolbar.react');
-const Uploader = require('Uploader.react');
 
 const TABS = ['Home', 'Abstract', 'Proposal', 'Report'];
 
@@ -18,7 +18,7 @@ class Home extends React.Component {
   getContent() {
     let tab = TABS[this.state.activeTabKey];
     if (tab === 'Home') {
-      return <Uploader />;
+      return <ImageCaptioner />;
     }
     return <DocumentViewer tab={tab} />;
   }
