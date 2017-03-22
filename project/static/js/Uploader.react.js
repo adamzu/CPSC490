@@ -22,6 +22,11 @@ class Uploader extends React.Component {
     });
     request.post('/upload')
       .attach('image', image, image.name)
+      .timeout({
+        deadline: 60000,
+        response: 5000,
+      })
+      // TODO: add abort
       .end((error, result) => {
         // TODO: replace with actual function that displays preview
         console.log(error);
@@ -32,7 +37,7 @@ class Uploader extends React.Component {
   // TODO: move preview
   render() {
     return (
-      <div className="dropzone-container">
+      <div className="uploader-container">
         <Dropzone
           accept="image/*"
           className="dropzone"

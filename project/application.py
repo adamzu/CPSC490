@@ -16,7 +16,7 @@ def upload():
         print(exif)
         image = get_oriented_image(image, exif)
     # TODO: remove show eventually
-    image.show()
+    #  image.show()
     image.close()
     # TODO: return image
     return "hello"
