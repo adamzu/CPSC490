@@ -10,6 +10,7 @@ class ImageCaptioner extends React.Component {
   constructor(props) {
     super(props);
     this.onDropAccepted = this.onDropAccepted.bind(this);
+    this.onUploadResponse = this.onUploadResponse.bind(this);
     this.request = null;
     this.state = {
       droppedImage: '',
@@ -24,28 +25,31 @@ class ImageCaptioner extends React.Component {
       droppedImage: droppedImage,
       loading: true,
     });
-    this.request = request.post('/upload')
-      .attach('image', droppedImage, droppedImage.name)
-      .timeout({
-        deadline: 60000,
-        response: 5000,
-      })
-      // TODO: fix setState issue
-      .end((error, result) => {
-        if (error || !result.ok) {
-          console.log(error);
-        } else {
-          console.log(result);
-          this.setState({
-            loading: false,
-            processedImage: result.text,
-          });
-        }
-      });
+    this.sendUploadRequest(droppedImage);
   }
 
-  componentDidMount() {
+  sendUploadRequest(droppedImage) {
+    setTimeout(() => {
+      this.request = request.post('/upload')
+        .attach('image', droppedImage, droppedImage.name)
+        .timeout({
+          deadline: 60000,
+          response: 5000,
+        })
+        .end(this.onUploadResponse);
+    }, 100);
+  }
 
+  onUploadResponse(error, result) {
+    if (error || !result.ok) {
+      console.log(error);
+    } else {
+      console.log(result);
+      this.setState({
+        loading: false,
+        processedImage: result.text,
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -65,11 +69,6 @@ class ImageCaptioner extends React.Component {
                 loading={this.state.loading}
                 src={this.state.processedImage}
               />
-            // : <this.state.processedImage === null
-            //   ? <Spinner />
-            //   : <ImagePreview
-            //       src={this.state.processedImage}
-            //     />
         }
       </div>
     );
