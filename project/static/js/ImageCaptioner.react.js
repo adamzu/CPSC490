@@ -12,8 +12,9 @@ class ImageCaptioner extends React.Component {
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.request = null;
     this.state = {
-      droppedImage: null,
-      processedImage: null,
+      droppedImage: '',
+      loading: false,
+      processedImage: '',
     }
   }
 
@@ -21,6 +22,7 @@ class ImageCaptioner extends React.Component {
     let droppedImage = droppedImages[0];
     this.setState({
       droppedImage: droppedImage,
+      loading: true,
     });
     this.request = request.post('/upload')
       .attach('image', droppedImage, droppedImage.name)
@@ -35,7 +37,8 @@ class ImageCaptioner extends React.Component {
         } else {
           console.log(result);
           this.setState({
-            processedImage: result.text
+            loading: false,
+            processedImage: result.text,
           });
         }
       });
@@ -56,13 +59,17 @@ class ImageCaptioner extends React.Component {
     return (
       <div className="captioner-container">
         {
-          this.state.droppedImage === null
+          this.state.droppedImage === ''
             ? <ImageUploader onDropAccepted={this.onDropAccepted}/>
-            : this.state.processedImage === null
-              ? <Spinner />
-              : <ImagePreview
-                  src={this.state.processedImage}
-                />
+            : <ImagePreview
+                loading={this.state.loading}
+                src={this.state.processedImage}
+              />
+            // : <this.state.processedImage === null
+            //   ? <Spinner />
+            //   : <ImagePreview
+            //       src={this.state.processedImage}
+            //     />
         }
       </div>
     );

@@ -24,3 +24,7 @@ class ImageUploader extends React.Component {
   }
 }
 module.exports = ImageUploader
+
+ImageUploader.propTypes = {
+  onDropAccepted: React.PropTypes.func.isRequired,
+}
