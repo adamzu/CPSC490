@@ -1,22 +1,26 @@
+const ImageCaption = require('ImageCaption.react');
 const React = require('react');
 const Spinner = require('Spinner.react');
 
-import { Thumbnail } from 'react-bootstrap';
+import { Button, Thumbnail } from 'react-bootstrap';
 
 class ImagePreview extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      caption: '',
+    }
   }
 
   render() {
     return (
-      <div>
+      <div className="image-preview-container">
         {
           this.props.loading
             ? <Spinner />
             : <Thumbnail src={this.props.src}>
-                <p>Caption</p>
+                <ImageCaption />
               </Thumbnail>
         }
       </div>

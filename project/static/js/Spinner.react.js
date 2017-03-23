@@ -8,7 +8,7 @@ class Spinner extends React.Component {
 
   render() {
     return (
-      <Image circle src={SPINNER_PATH} />
+      <Image circle className="spinner" src={SPINNER_PATH} />
     );
   }
 }

@@ -1,7 +1,6 @@
 const ImageUploader = require('ImageUploader.react');
 const ImagePreview = require('ImagePreview.react');
 const React = require('react');
-const Spinner = require('Spinner.react');
 
 import request from 'superagent';
 

@@ -29,8 +29,7 @@ class DocumentViewer extends React.Component {
       totalPages: total,
     });
   }
-
-  // TODO: fix setState issue
+  
   onDocumentError() {
     this.setState({
       totalPages: 0,
