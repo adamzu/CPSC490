@@ -44,19 +44,20 @@
   font-size: 80px;
 }
 
-.image-preview-container img {
+.image-preview-container img.spinner {
   height: 200px;
   width: 200px;
 }
 
-/*.image-preview-container {
-  height: 350px;
-  width: 350px;
+.thumbnail {
+  margin-bottom: 0px;
 }
 
-.image-preview-container img {
+.thumbnail-container img {
+  max-height: 342px;
+  max-width: 692px;
   object-fit: contain;
-}*/
+}
 
 .caption img.spinner {
   height: 20px;
