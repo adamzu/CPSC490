@@ -29,7 +29,7 @@ class DocumentViewer extends React.Component {
       totalPages: total,
     });
   }
-  
+
   onDocumentError() {
     this.setState({
       totalPages: 0,
@@ -40,6 +40,12 @@ class DocumentViewer extends React.Component {
     this.setState({
       currentPageIndex: eventKey - 1,
       currentPage: eventKey,
+    });
+  }
+
+  componentWillReceiveProps() {
+    this.setState({
+      totalPages: 0,
     });
   }
 

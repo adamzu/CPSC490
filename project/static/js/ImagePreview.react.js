@@ -19,7 +19,6 @@ class ImagePreview extends React.Component {
         {
           this.props.loading
             ? <Spinner />
-            // TODO: use object-fit in styles.css to properly style
             : <div className="thumbnail-container">
                 <Thumbnail src={this.props.src}>
                     <ImageCaption />
