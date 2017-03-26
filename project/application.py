@@ -19,5 +19,9 @@ def upload():
     session['image'] = ProcessedImage(request.files['image'])
     return session['image'].get_base64_string()
 
+@app.route('/caption', methods=['POST'])
+def caption():
+    return "This is the caption."
+
 if __name__ == '__main__':
     app.run()
