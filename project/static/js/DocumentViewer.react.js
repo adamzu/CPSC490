@@ -43,12 +43,6 @@ class DocumentViewer extends React.Component {
     });
   }
 
-  componentWillReceiveProps() {
-    this.setState({
-      totalPages: 0,
-    });
-  }
-
   render() {
     return (
       <div className="viewer">
