@@ -3,12 +3,14 @@ const React = require('react');
 
 import { Glyphicon } from 'react-bootstrap';
 
+const ACCEPTED_MIME_TYPES = ['image/jpeg', 'image/png'];
+
 class ImageUploader extends React.Component {
 
   render() {
     return (
       <Dropzone
-        accept="image/*"
+        accept={ACCEPTED_MIME_TYPES.join(',')}
         activeClassName="active"
         className="dropzone"
         onDropAccepted={this.props.onDropAccepted}
