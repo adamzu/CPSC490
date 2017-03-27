@@ -2,7 +2,7 @@ const ImageCaption = require('ImageCaption.react');
 const React = require('react');
 const Spinner = require('Spinner.react');
 
-import { Button, Thumbnail } from 'react-bootstrap';
+import { Button, Glyphicon, Thumbnail } from 'react-bootstrap';
 
 class ImagePreview extends React.Component {
 
@@ -14,6 +14,7 @@ class ImagePreview extends React.Component {
   }
 
   render() {
+    // TODO: add button to upload new image
     return (
       <div className="image-preview-container">
         {
@@ -21,8 +22,8 @@ class ImagePreview extends React.Component {
             ? <Spinner />
             : <div className="thumbnail-container">
                 <Thumbnail src={this.props.src}>
-                    <ImageCaption />
-                  </Thumbnail>
+                  <ImageCaption />
+                </Thumbnail>
               </div>
         }
       </div>

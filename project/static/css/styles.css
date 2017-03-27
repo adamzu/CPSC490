@@ -51,10 +51,18 @@
   margin: auto;
 }
 
-.thumbnail-container img {
+.thumbnail-container img:not(.spinner) {
+  min-height: 86px;
+  min-width: 173px;
   max-height: 342px;
   max-width: 692px;
   object-fit: contain;
+}
+
+.caption {
+  overflow: auto;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .caption img.spinner {
