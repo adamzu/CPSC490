@@ -15,6 +15,7 @@ class ImagePreview extends React.Component {
 
   render() {
     // TODO: add button to upload new image
+    // TODO: maybe store image at top level (ImageCaptioner)
     return (
       <div className="image-preview-container">
         {
