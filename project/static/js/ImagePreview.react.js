@@ -2,7 +2,7 @@ const ImageCaption = require('ImageCaption.react');
 const React = require('react');
 const Spinner = require('Spinner.react');
 
-import { Glyphicon, Thumbnail } from 'react-bootstrap';
+import { Glyphicon, OverlayTrigger, Tooltip, Thumbnail } from 'react-bootstrap';
 
 class ImagePreview extends React.Component {
 
@@ -14,7 +14,6 @@ class ImagePreview extends React.Component {
   }
 
   render() {
-    // TODO: add button to upload new image
     // TODO: maybe store image at top level (ImageCaptioner)
     return (
       <div className="image-preview-container">
@@ -22,10 +21,16 @@ class ImagePreview extends React.Component {
           this.props.loading
             ? <Spinner />
             : <div className="thumbnail-container">
-                <Glyphicon
-                  className="back-button"
-                  glyph="remove-circle"
-                  onClick={this.props.onResetImage} />
+                <OverlayTrigger
+                  overlay={<Tooltip id="reset">Reset image</Tooltip>}
+                  placement="top"
+                >
+                  <Glyphicon
+                    className="back-button"
+                    glyph="remove-circle"
+                    onClick={this.props.onResetImage}
+                  />
+                </OverlayTrigger>
                 <Thumbnail src={this.props.src}>
                   <ImageCaption />
                 </Thumbnail>
