@@ -40,6 +40,5 @@ class ProcessedImage():
 
     def get_caption(self):
         # TODO: implement caption algorithm
-        # caption = 'This is the caption.'
-        caption = str(random.random())
+        caption = 'This is the caption.'
         return caption
