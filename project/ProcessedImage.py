@@ -36,3 +36,8 @@ class ProcessedImage():
     def get_base64_string(self):
         return 'data:image/jpeg;base64,' \
             + base64.b64encode(self._get_raw_data().getvalue()).decode('utf-8')
+
+    def get_caption(self):
+        # TODO: implement caption algorithm
+        caption = 'This is the caption.'
+        return caption

@@ -12,6 +12,7 @@ Session(app)
 
 @app.route('/')
 def index():
+    session.clear()
     return render_template('index.html')
 
 @app.route('/upload', methods=['POST'])
@@ -21,7 +22,7 @@ def upload():
 
 @app.route('/caption', methods=['POST'])
 def caption():
-    return "This is the caption."
+    return session['image'].get_caption()
 
 if __name__ == '__main__':
     app.run()
