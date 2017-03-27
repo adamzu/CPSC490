@@ -14,10 +14,14 @@ class Home extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.onResetImage = this.onResetImage.bind(this);
+    this.onCaptionResponse = this.onCaptionResponse.bind(this);
     this.onUploadResponse = this.onUploadResponse.bind(this);
+    this.request = null;
+    this.sendCaptionRequest = this.sendCaptionRequest.bind(this);
     this.sendUploadRequest = this.sendUploadRequest.bind(this);
     this.state = {
       activeTabKey: 0,
+      caption: '',
       droppedImage: null,
       loading: false,
       processedImage: '',
@@ -29,11 +33,13 @@ class Home extends React.Component {
     if (tab === 'Home') {
       return (
         <ImageCaptioner
+          caption={this.state.caption}
           droppedImage={this.state.droppedImage}
           loading={this.state.loading}
           onDropAccepted={this.onDropAccepted}
           onResetImage={this.onResetImage}
           processedImage={this.state.processedImage}
+          sendCaptionRequest={this.sendCaptionRequest}
         />
       );
     }
@@ -80,10 +86,32 @@ class Home extends React.Component {
 
   onResetImage() {
     this.setState({
+      caption: '',
       droppedImage: null,
       loading: false,
       processedImage: '',
     });
+  }
+
+  sendCaptionRequest() {
+    setTimeout(() => {
+      this.request = request.post('/caption')
+        .timeout({
+          deadline: 60000,
+          response: 5000,
+        })
+        .end(this.onCaptionResponse);
+    }, 100);
+  }
+
+  onCaptionResponse(error, result) {
+    if (error || !result.ok) {
+      console.log(error);
+    } else {
+      this.setState({
+        caption: result.text,
+      });
+    }
   }
 
   componentWillUnmount() {

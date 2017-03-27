@@ -4,10 +4,6 @@ const React = require('react');
 
 class ImageCaptioner extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="captioner-container">
@@ -15,8 +11,10 @@ class ImageCaptioner extends React.Component {
           this.props.droppedImage === null
             ? <ImageUploader onDropAccepted={this.props.onDropAccepted}/>
             : <ImagePreview
+                caption={this.props.caption}
                 loading={this.props.loading}
                 onResetImage={this.props.onResetImage}
+                sendCaptionRequest={this.props.sendCaptionRequest}
                 src={this.props.processedImage}
               />
         }
@@ -27,6 +25,7 @@ class ImageCaptioner extends React.Component {
 module.exports = ImageCaptioner
 
 ImageCaptioner.propTypes = {
+  caption: React.PropTypes.string.isRequired,
   droppedImage: React.PropTypes.object,
   loading: React.PropTypes.bool.isRequired,
   processedImage: React.PropTypes.string.isRequired,

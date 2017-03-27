@@ -2,6 +2,7 @@ from io import BytesIO
 from PIL import ExifTags, Image
 
 import base64
+import random
 
 class ProcessedImage():
     def __init__(self, image_file):
@@ -39,5 +40,6 @@ class ProcessedImage():
 
     def get_caption(self):
         # TODO: implement caption algorithm
-        caption = 'This is the caption.'
+        # caption = 'This is the caption.'
+        caption = str(random.random())
         return caption

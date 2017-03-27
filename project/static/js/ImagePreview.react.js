@@ -7,13 +7,6 @@ import { Thumbnail } from 'react-bootstrap';
 
 class ImagePreview extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      caption: '',
-    }
-  }
-
   render() {
     return (
       <div className="image-preview-container">
@@ -23,7 +16,10 @@ class ImagePreview extends React.Component {
             : <div className="thumbnail-container">
                 <ImageResetButton onResetImage={this.props.onResetImage}/>
                 <Thumbnail src={this.props.src}>
-                  <ImageCaption />
+                  <ImageCaption
+                    caption={this.props.caption}
+                    sendCaptionRequest={this.props.sendCaptionRequest}
+                  />
                 </Thumbnail>
               </div>
         }
