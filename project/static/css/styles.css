@@ -42,6 +42,10 @@
   font-size: 80px;
 }
 
+.image-preview-container {
+  max-width: 700px;
+}
+
 .image-preview-container img.spinner {
   height: 200px;
   width: 200px;
@@ -60,6 +64,7 @@
 }
 
 .caption {
+  max-height: 50px;
   overflow: auto;
   word-break: break-all;
   word-wrap: break-word;
