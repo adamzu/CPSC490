@@ -3,6 +3,8 @@ const ImageCaptioner = require('ImageCaptioner.react');
 const React = require('react');
 const Toolbar = require('Toolbar.react');
 
+import request from 'superagent';
+
 const TABS = ['Home', 'Abstract', 'Proposal', 'Report'];
 
 class Home extends React.Component {
@@ -10,15 +12,30 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
+    this.onDropAccepted = this.onDropAccepted.bind(this);
+    this.onResetImage = this.onResetImage.bind(this);
+    this.onUploadResponse = this.onUploadResponse.bind(this);
+    this.sendUploadRequest = this.sendUploadRequest.bind(this);
     this.state = {
       activeTabKey: 0,
+      droppedImage: '',
+      loading: false,
+      processedImage: '',
     };
   }
 
   getContent() {
     let tab = TABS[this.state.activeTabKey];
     if (tab === 'Home') {
-      return <ImageCaptioner />;
+      return (
+        <ImageCaptioner
+          droppedImage={this.state.droppedImage}
+          loading={this.state.loading}
+          onDropAccepted={this.onDropAccepted}
+          onResetImage={this.onResetImage}
+          processedImage={this.state.processedImage}
+        />
+      );
     }
     return <DocumentViewer file={tab} />;
   }
@@ -29,6 +46,53 @@ class Home extends React.Component {
     });
   }
 
+  onDropAccepted(droppedImages) {
+    let droppedImage = droppedImages[0];
+    this.setState({
+      droppedImage: droppedImage,
+      loading: true,
+    });
+    this.sendUploadRequest(droppedImage);
+  }
+
+  sendUploadRequest(droppedImage) {
+    setTimeout(() => {
+      this.request = request.post('/upload')
+        .attach('image', droppedImage, droppedImage.name)
+        .timeout({
+          deadline: 60000,
+          response: 5000,
+        })
+        .end(this.onUploadResponse);
+    }, 100);
+  }
+
+  onUploadResponse(error, result) {
+    if (error || !result.ok) {
+      console.log(error);
+    } else {
+      console.log(result);
+      this.setState({
+        loading: false,
+        processedImage: result.text,
+      });
+    }
+  }
+
+  onResetImage() {
+    this.setState({
+      droppedImage: '',
+      loading: false,
+      processedImage: '',
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.request !== null) {
+      this.request.abort();
+      this.request = null;
+    }
+  }
 
   render() {
     return (
