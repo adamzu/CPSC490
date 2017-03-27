@@ -5,10 +5,6 @@ import ReactPDF from 'react-pdf';
 
 class DocumentViewerPane extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   getDocumentPath() {
     return `/static/documents/${this.props.file}.pdf`;
   }

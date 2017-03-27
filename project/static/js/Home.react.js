@@ -17,8 +17,6 @@ class Home extends React.Component {
     this.onCaptionResponse = this.onCaptionResponse.bind(this);
     this.onUploadResponse = this.onUploadResponse.bind(this);
     this.request = null;
-    this.sendCaptionRequest = this.sendCaptionRequest.bind(this);
-    this.sendUploadRequest = this.sendUploadRequest.bind(this);
     this.state = {
       activeTabKey: 0,
       caption: '',
@@ -39,7 +37,6 @@ class Home extends React.Component {
           onDropAccepted={this.onDropAccepted}
           onResetImage={this.onResetImage}
           processedImage={this.state.processedImage}
-          sendCaptionRequest={this.sendCaptionRequest}
         />
       );
     }
@@ -81,6 +78,7 @@ class Home extends React.Component {
         loading: false,
         processedImage: result.text,
       });
+      this.sendCaptionRequest();
     }
   }
 

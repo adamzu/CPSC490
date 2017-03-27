@@ -4,10 +4,6 @@ import { Pagination } from 'react-bootstrap';
 
 class DocumentViewerControls extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Pagination

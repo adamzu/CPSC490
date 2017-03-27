@@ -16,10 +16,7 @@ class ImagePreview extends React.Component {
             : <div className="thumbnail-container">
                 <ImageResetButton onResetImage={this.props.onResetImage}/>
                 <Thumbnail src={this.props.src}>
-                  <ImageCaption
-                    caption={this.props.caption}
-                    sendCaptionRequest={this.props.sendCaptionRequest}
-                  />
+                  <ImageCaption caption={this.props.caption} />
                 </Thumbnail>
               </div>
         }

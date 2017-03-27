@@ -14,7 +14,6 @@ class ImageCaptioner extends React.Component {
                 caption={this.props.caption}
                 loading={this.props.loading}
                 onResetImage={this.props.onResetImage}
-                sendCaptionRequest={this.props.sendCaptionRequest}
                 src={this.props.processedImage}
               />
         }
