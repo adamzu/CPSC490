@@ -20,7 +20,7 @@ class Home extends React.Component {
     if (tab === 'Home') {
       return <ImageCaptioner />;
     }
-    return <DocumentViewer tab={tab} />;
+    return <DocumentViewer file={tab} />;
   }
 
   handleSelect(eventKey) {

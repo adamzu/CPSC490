@@ -60,7 +60,7 @@ class DocumentViewer extends React.Component {
         }
         <div className="pane" id="pane">
           <DocumentViewerPane
-            file={this.props.tab}
+            file={this.props.file}
             onDocumentError={this.onDocumentError}
             onDocumentLoad={this.onDocumentLoad}
             currentPageIndex={this.state.currentPageIndex}
@@ -74,5 +74,5 @@ class DocumentViewer extends React.Component {
 module.exports = DocumentViewer;
 
 DocumentViewer.propTypes = {
-  tab: React.PropTypes.string.isRequired,
+  file: React.PropTypes.string.isRequired,
 }
