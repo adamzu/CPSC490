@@ -1,8 +1,9 @@
 const ImageCaption = require('ImageCaption.react');
+const ImageResetButton = require('ImageResetButton.react');
 const React = require('react');
 const Spinner = require('Spinner.react');
 
-import { Glyphicon, OverlayTrigger, Tooltip, Thumbnail } from 'react-bootstrap';
+import { Thumbnail } from 'react-bootstrap';
 
 class ImagePreview extends React.Component {
 
@@ -21,16 +22,7 @@ class ImagePreview extends React.Component {
           this.props.loading
             ? <Spinner />
             : <div className="thumbnail-container">
-                <OverlayTrigger
-                  overlay={<Tooltip id="reset">Reset image</Tooltip>}
-                  placement="top"
-                >
-                  <Glyphicon
-                    className="back-button"
-                    glyph="remove-circle"
-                    onClick={this.props.onResetImage}
-                  />
-                </OverlayTrigger>
+                <ImageResetButton onResetImage={this.props.onResetImage}/>
                 <Thumbnail src={this.props.src}>
                   <ImageCaption />
                 </Thumbnail>

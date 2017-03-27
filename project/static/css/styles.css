@@ -59,7 +59,7 @@
   position: relative;
 }
 
-.thumbnail-container .back-button {
+.thumbnail-container .reset-button {
   color: lightgray;
   cursor: pointer;
   font-size: 30px;
@@ -71,7 +71,7 @@
   z-index: 10;
 }
 
-.thumbnail-container .back-button:hover {
+.thumbnail-container .reset-button:hover {
   opacity: 0.8;
 }
 
