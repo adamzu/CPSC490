@@ -2,7 +2,7 @@ const ImageCaption = require('ImageCaption.react');
 const React = require('react');
 const Spinner = require('Spinner.react');
 
-import { Button, Glyphicon, Thumbnail } from 'react-bootstrap';
+import { Glyphicon, Thumbnail } from 'react-bootstrap';
 
 class ImagePreview extends React.Component {
 
@@ -22,6 +22,10 @@ class ImagePreview extends React.Component {
           this.props.loading
             ? <Spinner />
             : <div className="thumbnail-container">
+                <Glyphicon
+                  className="back-button"
+                  glyph="remove-circle"
+                  onClick={this.props.onResetImage} />
                 <Thumbnail src={this.props.src}>
                   <ImageCaption />
                 </Thumbnail>
@@ -35,5 +39,6 @@ module.exports = ImagePreview
 
 ImagePreview.propTypes = {
   loading: React.PropTypes.bool.isRequired,
+  onResetImage: React.PropTypes.func.isRequired,
   src: React.PropTypes.string.isRequired,
 }

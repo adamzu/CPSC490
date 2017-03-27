@@ -9,6 +9,7 @@ class ImageCaptioner extends React.Component {
   constructor(props) {
     super(props);
     this.onDropAccepted = this.onDropAccepted.bind(this);
+    this.onResetImage = this.onResetImage.bind(this);
     this.onUploadResponse = this.onUploadResponse.bind(this);
     this.request = null;
     this.state = {
@@ -39,6 +40,14 @@ class ImageCaptioner extends React.Component {
     }, 100);
   }
 
+  onResetImage() {
+    this.setState({
+      droppedImage: '',
+      loading: false,
+      processedImage: '',
+    });
+  }
+
   onUploadResponse(error, result) {
     if (error || !result.ok) {
       console.log(error);
@@ -66,6 +75,7 @@ class ImageCaptioner extends React.Component {
             ? <ImageUploader onDropAccepted={this.onDropAccepted}/>
             : <ImagePreview
                 loading={this.state.loading}
+                onResetImage={this.onResetImage}
                 src={this.state.processedImage}
               />
         }

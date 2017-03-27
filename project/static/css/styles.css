@@ -10,6 +10,8 @@
   top: 50px;
 }
 
+/* Captioner */
+
 .captioner-container {
   margin: auto;
 }
@@ -44,6 +46,7 @@
 
 .image-preview-container {
   max-width: 700px;
+  position: relative;
 }
 
 .image-preview-container img.spinner {
@@ -53,6 +56,23 @@
 
 .thumbnail {
   margin: auto;
+  position: relative;
+}
+
+.thumbnail-container .back-button {
+  color: lightgray;
+  cursor: pointer;
+  font-size: 30px;
+  margin: 5px;
+  left: 2px;
+  opacity: 0.3;
+  position: absolute;
+  top: 2px;
+  z-index: 10;
+}
+
+.thumbnail-container .back-button:hover {
+  opacity: 0.8;
 }
 
 .thumbnail-container img:not(.spinner) {
@@ -74,6 +94,8 @@
   height: 20px;
   width: 20px;
 }
+
+/* Document Viewer */
 
 .viewer {
   border-width: 1px;
