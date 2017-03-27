@@ -12,7 +12,7 @@ class ImageCaptioner extends React.Component {
     return (
       <div className="captioner-container">
         {
-          this.props.droppedImage === ''
+          this.props.droppedImage === null
             ? <ImageUploader onDropAccepted={this.props.onDropAccepted}/>
             : <ImagePreview
                 loading={this.props.loading}
@@ -27,7 +27,7 @@ class ImageCaptioner extends React.Component {
 module.exports = ImageCaptioner
 
 ImageCaptioner.propTypes = {
-  droppedImage: React.PropTypes.object.isRequired,
+  droppedImage: React.PropTypes.object,
   loading: React.PropTypes.bool.isRequired,
   processedImage: React.PropTypes.string.isRequired,
   onDropAccepted: React.PropTypes.func.isRequired,

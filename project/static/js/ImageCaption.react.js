@@ -29,7 +29,6 @@ class ImageCaption extends React.Component {
     if (error || !result.ok) {
       console.log(error);
     } else {
-      console.log(result);
       this.setState({
         caption: result.text,
       });

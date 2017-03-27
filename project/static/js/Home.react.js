@@ -18,7 +18,7 @@ class Home extends React.Component {
     this.sendUploadRequest = this.sendUploadRequest.bind(this);
     this.state = {
       activeTabKey: 0,
-      droppedImage: '',
+      droppedImage: null,
       loading: false,
       processedImage: '',
     };
@@ -71,7 +71,6 @@ class Home extends React.Component {
     if (error || !result.ok) {
       console.log(error);
     } else {
-      console.log(result);
       this.setState({
         loading: false,
         processedImage: result.text,
@@ -81,7 +80,7 @@ class Home extends React.Component {
 
   onResetImage() {
     this.setState({
-      droppedImage: '',
+      droppedImage: null,
       loading: false,
       processedImage: '',
     });
