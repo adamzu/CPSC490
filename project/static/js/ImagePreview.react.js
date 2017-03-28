@@ -14,7 +14,7 @@ class ImagePreview extends React.Component {
           this.props.loading
             ? <Spinner />
             : <div className="thumbnail-container">
-                <ImageResetButton onResetImage={this.props.onResetImage}/>
+                <ImageResetButton onResetImage={this.props.onResetImage} />
                 <Thumbnail src={this.props.src}>
                   <ImageCaption caption={this.props.caption} />
                 </Thumbnail>
@@ -27,6 +27,7 @@ class ImagePreview extends React.Component {
 module.exports = ImagePreview
 
 ImagePreview.propTypes = {
+  caption: React.PropTypes.string.isRequired,
   loading: React.PropTypes.bool.isRequired,
   onResetImage: React.PropTypes.func.isRequired,
   src: React.PropTypes.string.isRequired,

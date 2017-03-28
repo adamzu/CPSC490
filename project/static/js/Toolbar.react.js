@@ -39,6 +39,7 @@ class Toolbar extends React.Component {
 module.exports = Toolbar
 
 Toolbar.propTypes = {
+  activeTabKey: React.PropTypes.number.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
   tabs: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 }

@@ -9,7 +9,7 @@ class ImageCaptioner extends React.Component {
       <div className="captioner-container">
         {
           this.props.droppedImage === null
-            ? <ImageUploader onDropAccepted={this.props.onDropAccepted}/>
+            ? <ImageUploader onDropAccepted={this.props.onDropAccepted} />
             : <ImagePreview
                 caption={this.props.caption}
                 loading={this.props.loading}
