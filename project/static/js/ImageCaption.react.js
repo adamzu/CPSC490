@@ -18,5 +18,5 @@ class ImageCaption extends React.Component {
 module.exports = ImageCaption;
 
 ImageCaption.propTypes = {
-  caption: React.propTypes.string.isRequired,
+  caption: React.PropTypes.string.isRequired,
 }
