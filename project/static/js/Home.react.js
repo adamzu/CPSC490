@@ -128,7 +128,7 @@ class Home extends React.Component {
           tabs={TABS}
         />
         <div className="content">
-          {this.getContent(this.toolbar)}
+          {this.getContent()}
         </div>
       </div>
     );
