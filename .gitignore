@@ -1,5 +1,7 @@
 .DS_Store
 __pycache__
+bazel-*
 bundle.js
+im2txt/im2txt/model/
 node_modules
 venv
