@@ -2,6 +2,6 @@
 __pycache__
 bazel-*
 bundle.js
-im2txt/im2txt/model/
+model
 node_modules
 venv
