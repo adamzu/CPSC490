@@ -1,3 +1,4 @@
+cd im2txt/
 MODEL_PATH="${PWD}/im2txt/model"
 CHECKPOINT_PATH="${MODEL_PATH}/model.ckpt-2000000"
 VOCAB_FILE="${MODEL_PATH}/word_counts.txt"
