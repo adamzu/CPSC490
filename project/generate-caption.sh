@@ -14,4 +14,3 @@ bazel-bin/im2txt/run_inference \
   --checkpoint_path=${CHECKPOINT_PATH} \
   --vocab_file=${VOCAB_FILE} \
   --input_files=$1
-  # --input_files=${IMAGE_FILE}
