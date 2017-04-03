@@ -2,6 +2,7 @@ from io import BytesIO
 from PIL import ExifTags, Image
 from tempfile import NamedTemporaryFile
 
+import api_keys
 import base64
 import random
 import subprocess
