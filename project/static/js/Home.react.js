@@ -64,7 +64,6 @@ class Home extends React.Component {
         .attach('image', droppedImage, droppedImage.name)
         .timeout({
           deadline: 60000,
-          response: 5000,
         })
         .end(this.onUploadResponse);
     }, 100);
@@ -96,7 +95,6 @@ class Home extends React.Component {
       this.request = request.post('/caption')
         .timeout({
           deadline: 60000,
-          response: 5000,
         })
         .end(this.onCaptionResponse);
     }, 100);
