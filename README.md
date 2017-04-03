@@ -6,10 +6,10 @@ Ensure `python3` and `pip3` are installed. Then do the following:
 
 1. `pip install virtualenv`
 1. `virtualenv -p python3 venv; source venv/bin/activate`
-1. `pip install pipreqs`
 1. `pip install -r requirements.txt`
 1. `npm install`
 1. Replace the line with `PATH` in `~/.profile` with the following: `PATH="$HOME/bin:$HOME/.local/bin:./node_modules/.bin:$PATH"`
+1. Install and set up [Tensorflow and its dependencies](https://medium.com/@acrosson/installing-nvidia-cuda-cudnn-tensorflow-and-keras-69bbf33dce8a) (on a computer with a GPU only)
 
 ## To run:
 In one terminal window, run `./setup.sh` or:
