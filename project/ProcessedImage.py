@@ -64,7 +64,9 @@ class ProcessedImage():
         if not output:
             return None
         tokens = output.split('\n')[1].strip().split()
-        tokens = tokens[1:-2]
+        tokens = tokens[1:-1]
+        if tokens[-1] == '.':
+            tokens.pop()
         tokens[0] = tokens[0].capitalize()
         caption = ' '.join(tokens)
         return caption
