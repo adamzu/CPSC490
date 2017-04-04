@@ -1,4 +1,5 @@
 const Dropzone = require('react-dropzone');
+const ImageLinkAccepter = require('ImageLinkAccepter.react');
 const React = require('react');
 
 import { Glyphicon } from 'react-bootstrap';
@@ -9,19 +10,22 @@ class ImageUploader extends React.Component {
 
   render() {
     return (
-      <Dropzone
-        accept={ACCEPTED_MIME_TYPES.join(',')}
-        activeClassName="active"
-        className="dropzone"
-        onDropAccepted={this.props.onDropAccepted}
-      >
-        <div className="placeholder">
-          <Glyphicon glyph="cloud-upload" /><br />
-          Drag and drop image here<br />
-          or<br />
-          Click to select a file to upload
-        </div>
-      </Dropzone>
+      <div>
+        <Dropzone
+          accept={ACCEPTED_MIME_TYPES.join(',')}
+          activeClassName="active"
+          className="dropzone"
+          onDropAccepted={this.props.onDropAccepted}
+        >
+          <div className="placeholder">
+            <Glyphicon glyph="cloud-upload" /><br />
+            <strong>Drag and drop image here<br /></strong>
+            or<br />
+            <strong>Click to select a file to upload</strong>
+          </div>
+        </Dropzone>
+        <ImageLinkAccepter />
+      </div>
     );
   }
 }

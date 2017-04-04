@@ -44,6 +44,25 @@
   font-size: 80px;
 }
 
+.accepter-container {
+  text-align: center;
+}
+
+.accepter {
+  display: flex;
+  margin-top: 3px; 
+}
+
+.accepter input {
+  margin: auto;
+  width: 240px;
+}
+
+.accepter button {
+  margin: auto;
+  width: 102px;
+}
+
 .image-preview-container {
   max-width: 700px;
   position: relative;
