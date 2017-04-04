@@ -16,8 +16,12 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    # TODO: if request.args.get('link') ...
-    session['image'] = ProcessedImage(request.files['image'])
+    if request.files:
+        session['image'] = ProcessedImage(image_file=request.files['image'])
+    else:
+        session['image'] = ProcessedImage(
+            image_url=request.get_json()['image_url']
+        )
     return session['image'].get_base64_string()
 
 @app.route('/caption', methods=['POST'])

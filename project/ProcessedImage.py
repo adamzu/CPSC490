@@ -5,13 +5,32 @@ from tempfile import NamedTemporaryFile
 import api_keys
 import base64
 import random
+import requests
 import subprocess
 
 IM2TXT_SCRIPT = './generate-caption.sh'
 
+class InvalidImageException(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
 class ProcessedImage():
-    def __init__(self, image_file):
-        self.PIL_image = Image.open(image_file)
+    def __init__(self, image_file=None, image_url=None):
+        self.PIL_image = None
+        if image_file:
+            self.PIL_image = Image.open(image_file)
+        elif image_url:
+            try:
+                self.PIL_image = Image.open(
+                    BytesIO(requests.get(image_url).content)
+                )
+            except (OSError, requests.RequestException):
+                raise InvalidImageException('Invalid image URL')
+        else:
+            raise InvalidImageException('No parameters supplied')
         self.exif = self._get_exif_data()
         self._orient_image()
 

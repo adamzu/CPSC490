@@ -16,10 +16,10 @@ class Home extends React.Component {
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.onLinkChange=this.onLinkChange.bind(this);
     this.onLinkSubmit=this.onLinkSubmit.bind(this);
+    this.onLinkUploadResponse = this.onLinkUploadResponse.bind(this);
     this.onResetImage = this.onResetImage.bind(this);
     this.onUploadResponse = this.onUploadResponse.bind(this);
     this.request = null;
-    // TODO: add stuff for ImageLinkAccepter
     this.state = {
       activeTabKey: 0,
       caption: '',
@@ -89,28 +89,33 @@ class Home extends React.Component {
   }
 
   onLinkSubmit() {
-    // TODO: disable button, spinner, send request
-    console.log(this.state.imageLink.trim());
+    this.setState({
+      droppedImage: {},
+      loading: true,
+    });
     this.sendLinkUploadRequest();
   }
 
   sendLinkUploadRequest() {
-    this.setState({
-      isInvalidImageLink: true,
-    });
-    // setTimeout(() => {
-    //   this.request = request.post('/upload')
-    //     .timeout({
-    //       deadline: 60000,
-    //     })
-    //     .end(this.onLinkUploadResponse);
-    // }, 100);
+    let link = this.state.imageLink.trim();
+    setTimeout(() => {
+      this.request = request.post('/upload')
+        .send({image_url: link})
+        .timeout({
+          deadline: 60000,
+        })
+        .end(this.onLinkUploadResponse);
+    }, 100);
   }
 
   onLinkUploadResponse(error, result) {
     if (error || !result.ok) {
       console.log(error);
-      // TODO: enable button, remove spinner, add error, show form invalid
+      this.setState({
+        droppedImage: null,
+        loading: false,
+        isInvalidImageLink: true,
+      });
     } else {
       this.setState({
         loading: false,
