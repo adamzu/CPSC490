@@ -106,7 +106,7 @@ class Home extends React.Component {
 
   onLinkSubmit() {
     // TODO: disable button, spinner, send request
-    console.log(this.state.imageLink);
+    console.log(this.state.imageLink.trim());
     // sendLinkUploadRequest();
   }
 

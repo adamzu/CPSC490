@@ -10,8 +10,8 @@ const VALID_LINK_REGEX = new RegExp(
 
 class ImageLinkAccepter extends React.Component {
 
-  isValidLink() {
-    return this.props.imageLink.match(VALID_LINK_REGEX);
+  isInvalidLink() {
+    return this.props.imageLink.match(VALID_LINK_REGEX) === null;
   }
 
   render() {
@@ -27,10 +27,8 @@ class ImageLinkAccepter extends React.Component {
               type="text"
               value={this.props.imageLink}
             />
-            {/* TODO: add validation state */}
             <Button
-              // TODO: add regex validation for disabling?
-              disabled={this.isValidLink()}
+              disabled={this.isInvalidLink()}
               onClick={this.props.onLinkSubmit}
             >
               Get Caption
