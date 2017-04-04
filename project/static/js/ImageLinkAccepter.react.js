@@ -3,7 +3,16 @@ const Spinner = require('Spinner.react');
 
 import { Button, Form, FormControl, FormGroup } from 'react-bootstrap';
 
+
+const VALID_LINK_REGEX = new RegExp(
+  /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi
+);
+
 class ImageLinkAccepter extends React.Component {
+
+  isValidLink() {
+    return this.props.imageLink.match(VALID_LINK_REGEX);
+  }
 
   render() {
     return (
@@ -21,7 +30,7 @@ class ImageLinkAccepter extends React.Component {
             {/* TODO: add validation state */}
             <Button
               // TODO: add regex validation for disabling?
-              disabled={this.props.imageLink === ''}
+              disabled={this.isValidLink()}
               onClick={this.props.onLinkSubmit}
             >
               Get Caption
