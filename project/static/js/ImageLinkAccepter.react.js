@@ -14,21 +14,31 @@ class ImageLinkAccepter extends React.Component {
     return this.props.imageLink.match(VALID_LINK_REGEX) === null;
   }
 
+  getValidationState() {
+      return this.props.isInvalidImageLink
+        ? 'error'
+        : null
+  }
+
   render() {
     return (
       <div className="accepter-container">
         or<br />
         <Form>
           <strong>Provide a direct link to an image on the web</strong><br/>
-          <FormGroup className="accepter">
+          <FormGroup
+            className="accepter"
+            validationState={this.getValidationState()}
+          >
             <FormControl
               onChange={this.props.onLinkChange}
               placeholder="Type in a URL here"
               type="text"
               value={this.props.imageLink}
             />
+            <FormControl.Feedback />
             <Button
-              disabled={this.isInvalidLink()}
+              disabled={this.isInvalidLink() || this.props.isInvalidImageLink}
               onClick={this.props.onLinkSubmit}
             >
               Get Caption
@@ -43,6 +53,7 @@ module.exports = ImageLinkAccepter
 
 ImageLinkAccepter.propTypes = {
   imageLink: React.PropTypes.string.isRequired,
+  isInvalidImageLink: React.PropTypes.bool.isRequired,
   onLinkChange: React.PropTypes.func.isRequired,
   onLinkSubmit: React.PropTypes.func.isRequired,
 }

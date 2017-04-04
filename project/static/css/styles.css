@@ -50,7 +50,7 @@
 
 .accepter {
   display: flex;
-  margin-top: 3px; 
+  margin-top: 3px;
 }
 
 .accepter input {
@@ -61,6 +61,10 @@
 .accepter button {
   margin: auto;
   width: 102px;
+}
+
+.accepter .glyphicon {
+  left: 210px;
 }
 
 .image-preview-container {

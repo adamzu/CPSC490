@@ -25,29 +25,10 @@ class Home extends React.Component {
       caption: '',
       droppedImage: null,
       imageLink: '',
+      isInvalidImageLink: false,
       loading: false,
       processedImage: '',
     };
-  }
-
-  getContent() {
-    let tab = TABS[this.state.activeTabKey];
-    if (tab === 'Home') {
-      return (
-        <ImageCaptioner
-          caption={this.state.caption}
-          droppedImage={this.state.droppedImage}
-          imageLink={this.state.imageLink}
-          loading={this.state.loading}
-          onDropAccepted={this.onDropAccepted}
-          onResetImage={this.onResetImage}
-          onLinkChange={this.onLinkChange}
-          onLinkSubmit={this.onLinkSubmit}
-          processedImage={this.state.processedImage}
-        />
-      );
-    }
-    return <DocumentViewer file={tab} />;
   }
 
   handleSelect(eventKey) {
@@ -92,8 +73,10 @@ class Home extends React.Component {
     this.setState({
       caption: '',
       droppedImage: null,
+      imageLink: '',
+      isInvalidImageLink: false,
       loading: false,
-      processedImage: '',
+      processedImage: ''
     });
   }
 
@@ -101,23 +84,27 @@ class Home extends React.Component {
     let link = event.target.value;
     this.setState({
       imageLink: link,
+      isInvalidImageLink: false,
     });
   }
 
   onLinkSubmit() {
     // TODO: disable button, spinner, send request
     console.log(this.state.imageLink.trim());
-    // sendLinkUploadRequest();
+    this.sendLinkUploadRequest();
   }
 
   sendLinkUploadRequest() {
-    setTimeout(() => {
-      this.request = request.post('/upload')
-        .timeout({
-          deadline: 60000,
-        })
-        .end(this.onLinkUploadResponse);
-    }, 100);
+    this.setState({
+      isInvalidImageLink: true,
+    });
+    // setTimeout(() => {
+    //   this.request = request.post('/upload')
+    //     .timeout({
+    //       deadline: 60000,
+    //     })
+    //     .end(this.onLinkUploadResponse);
+    // }, 100);
   }
 
   onLinkUploadResponse(error, result) {
@@ -158,6 +145,27 @@ class Home extends React.Component {
       this.request.abort();
       this.request = null;
     }
+  }
+
+  getContent() {
+    let tab = TABS[this.state.activeTabKey];
+    if (tab === 'Home') {
+      return (
+        <ImageCaptioner
+          caption={this.state.caption}
+          droppedImage={this.state.droppedImage}
+          imageLink={this.state.imageLink}
+          isInvalidImageLink={this.state.isInvalidImageLink}
+          loading={this.state.loading}
+          onDropAccepted={this.onDropAccepted}
+          onResetImage={this.onResetImage}
+          onLinkChange={this.onLinkChange}
+          onLinkSubmit={this.onLinkSubmit}
+          processedImage={this.state.processedImage}
+        />
+      );
+    }
+    return <DocumentViewer file={tab} />;
   }
 
   render() {

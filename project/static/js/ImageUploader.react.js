@@ -27,6 +27,7 @@ class ImageUploader extends React.Component {
         </Dropzone>
         <ImageLinkAccepter
           imageLink={this.props.imageLink}
+          isInvalidImageLink={this.props.isInvalidImageLink}
           onLinkChange={this.props.onLinkChange}
           onLinkSubmit={this.props.onLinkSubmit}
         />
@@ -38,6 +39,7 @@ module.exports = ImageUploader
 
 ImageUploader.propTypes = {
   imageLink: React.PropTypes.string.isRequired,
+  isInvalidImageLink: React.PropTypes.bool.isRequired,
   onDropAccepted: React.PropTypes.func.isRequired,
   onLinkChange: React.PropTypes.func.isRequired,
   onLinkSubmit: React.PropTypes.func.isRequired,
