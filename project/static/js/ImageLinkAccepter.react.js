@@ -1,11 +1,6 @@
 const React = require('react');
 
-import {
-  Button,
-  Form,
-  FormControl,
-  FormGroup,
-} from 'react-bootstrap';
+import { Button, Form, FormControl, FormGroup } from 'react-bootstrap';
 
 class ImageLinkAccepter extends React.Component {
 
@@ -20,6 +15,7 @@ class ImageLinkAccepter extends React.Component {
               placeholder="Type in a URL here"
               type="text"
             />
+            {/* TODO: add disabled/onClick to button for validation + validation state */}
             <Button>Get Caption</Button>
           </FormGroup>
         </Form>
@@ -30,5 +26,5 @@ class ImageLinkAccepter extends React.Component {
 module.exports = ImageLinkAccepter
 
 ImageLinkAccepter.propTypes = {
-
+  // TODO: add propTypes
 }

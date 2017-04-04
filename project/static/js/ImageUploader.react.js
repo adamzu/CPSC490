@@ -24,7 +24,9 @@ class ImageUploader extends React.Component {
             <strong>Click to select a file to upload</strong>
           </div>
         </Dropzone>
-        <ImageLinkAccepter />
+        <ImageLinkAccepter
+          // TODO: add props
+        />
       </div>
     );
   }

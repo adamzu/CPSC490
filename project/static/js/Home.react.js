@@ -17,6 +17,7 @@ class Home extends React.Component {
     this.onCaptionResponse = this.onCaptionResponse.bind(this);
     this.onUploadResponse = this.onUploadResponse.bind(this);
     this.request = null;
+    // TODO: add stuff for ImageLinkAccepter
     this.state = {
       activeTabKey: 0,
       caption: '',
