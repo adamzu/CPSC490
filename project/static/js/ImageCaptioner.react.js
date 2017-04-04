@@ -8,7 +8,7 @@ class ImageCaptioner extends React.Component {
     return (
       <div className="captioner-container">
         {
-          this.props.droppedImage === null
+          this.props.image === null
             ? <ImageUploader
               imageLink={this.props.imageLink}
               isInvalidImageLink={this.props.isInvalidImageLink}
@@ -31,7 +31,7 @@ module.exports = ImageCaptioner
 
 ImageCaptioner.propTypes = {
   caption: React.PropTypes.string.isRequired,
-  droppedImage: React.PropTypes.object,
+  image: React.PropTypes.object,
   imageLink: React.PropTypes.string.isRequired,
   isInvalidImageLink: React.PropTypes.bool.isRequired,
   loading: React.PropTypes.bool.isRequired,

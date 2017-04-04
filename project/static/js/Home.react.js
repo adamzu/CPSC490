@@ -23,7 +23,7 @@ class Home extends React.Component {
     this.state = {
       activeTabKey: 0,
       caption: '',
-      droppedImage: null,
+      image: null,
       imageLink: '',
       isInvalidImageLink: false,
       loading: false,
@@ -40,7 +40,7 @@ class Home extends React.Component {
   onDropAccepted(droppedImages) {
     let droppedImage = droppedImages[0];
     this.setState({
-      droppedImage: droppedImage,
+      image: droppedImage,
       loading: true,
     });
     this.sendUploadRequest(droppedImage);
@@ -60,6 +60,10 @@ class Home extends React.Component {
   onUploadResponse(error, result) {
     if (error || !result.ok) {
       console.log(error);
+      this.setState({
+        image: null,
+        loading: false,
+      });
     } else {
       this.setState({
         loading: false,
@@ -72,7 +76,7 @@ class Home extends React.Component {
   onResetImage() {
     this.setState({
       caption: '',
-      droppedImage: null,
+      image: null,
       imageLink: '',
       isInvalidImageLink: false,
       loading: false,
@@ -90,14 +94,13 @@ class Home extends React.Component {
 
   onLinkSubmit() {
     this.setState({
-      droppedImage: {},
+      image: {},
       loading: true,
     });
-    this.sendLinkUploadRequest();
+    this.sendLinkUploadRequest(this.state.imageLink.trim());
   }
 
-  sendLinkUploadRequest() {
-    let link = this.state.imageLink.trim();
+  sendLinkUploadRequest(link) {
     setTimeout(() => {
       this.request = request.post('/upload')
         .send({image_url: link})
@@ -112,7 +115,7 @@ class Home extends React.Component {
     if (error || !result.ok) {
       console.log(error);
       this.setState({
-        droppedImage: null,
+        image: null,
         loading: false,
         isInvalidImageLink: true,
       });
@@ -158,7 +161,7 @@ class Home extends React.Component {
       return (
         <ImageCaptioner
           caption={this.state.caption}
-          droppedImage={this.state.droppedImage}
+          image={this.state.image}
           imageLink={this.state.imageLink}
           isInvalidImageLink={this.state.isInvalidImageLink}
           loading={this.state.loading}

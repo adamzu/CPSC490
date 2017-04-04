@@ -41,6 +41,7 @@ class ImageLinkAccepter extends React.Component {
             {
               this.props.isInvalidImageLink
                 ? <OverlayTrigger
+                    defaultOverlayShown
                     overlay={<Tooltip id="url-error">Invalid image URL</Tooltip>}
                     placement="top"
                   >
