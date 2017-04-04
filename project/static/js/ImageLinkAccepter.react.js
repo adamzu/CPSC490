@@ -18,13 +18,13 @@ class ImageLinkAccepter extends React.Component {
               type="text"
               value={this.props.imageLink}
             />
-            {/* TODO: add disabled/onClick to button for validation + validation state */}
+            {/* TODO: add validation state */}
             <Button
+              // TODO: add regex validation for disabling?
               disabled={this.props.imageLink === ''}
               onClick={this.props.onLinkSubmit}
             >
               Get Caption
-              {/* or <Spinner /> with height 20px*/}
             </Button>
           </FormGroup>
         </Form>

@@ -16,6 +16,7 @@ class ImageUploader extends React.Component {
           activeClassName="active"
           className="dropzone"
           onDropAccepted={this.props.onDropAccepted}
+          preventDropOnDocument
         >
           <div className="placeholder">
             <Glyphicon glyph="cloud-upload" /><br />
