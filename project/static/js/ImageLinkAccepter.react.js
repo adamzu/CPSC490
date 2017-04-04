@@ -1,4 +1,5 @@
 const React = require('react');
+const Spinner = require('Spinner.react');
 
 import { Button, Form, FormControl, FormGroup } from 'react-bootstrap';
 
@@ -12,11 +13,19 @@ class ImageLinkAccepter extends React.Component {
           <strong>Provide a direct link to an image on the web</strong><br/>
           <FormGroup className="accepter">
             <FormControl
+              onChange={this.props.onLinkChange}
               placeholder="Type in a URL here"
               type="text"
+              value={this.props.imageLink}
             />
             {/* TODO: add disabled/onClick to button for validation + validation state */}
-            <Button>Get Caption</Button>
+            <Button
+              disabled={this.props.imageLink === ''}
+              onClick={this.props.onLinkSubmit}
+            >
+              Get Caption
+              {/* or <Spinner /> with height 20px*/}
+            </Button>
           </FormGroup>
         </Form>
       </div>
@@ -26,5 +35,7 @@ class ImageLinkAccepter extends React.Component {
 module.exports = ImageLinkAccepter
 
 ImageLinkAccepter.propTypes = {
-  // TODO: add propTypes
+  imageLink: React.PropTypes.string.isRequired,
+  onLinkChange: React.PropTypes.func.isRequired,
+  onLinkSubmit: React.PropTypes.func.isRequired,
 }

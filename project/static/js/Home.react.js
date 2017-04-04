@@ -12,9 +12,11 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
-    this.onDropAccepted = this.onDropAccepted.bind(this);
-    this.onResetImage = this.onResetImage.bind(this);
     this.onCaptionResponse = this.onCaptionResponse.bind(this);
+    this.onDropAccepted = this.onDropAccepted.bind(this);
+    this.onLinkChange=this.onLinkChange.bind(this);
+    this.onLinkSubmit=this.onLinkSubmit.bind(this);
+    this.onResetImage = this.onResetImage.bind(this);
     this.onUploadResponse = this.onUploadResponse.bind(this);
     this.request = null;
     // TODO: add stuff for ImageLinkAccepter
@@ -22,6 +24,7 @@ class Home extends React.Component {
       activeTabKey: 0,
       caption: '',
       droppedImage: null,
+      imageLink: '',
       loading: false,
       processedImage: '',
     };
@@ -34,9 +37,12 @@ class Home extends React.Component {
         <ImageCaptioner
           caption={this.state.caption}
           droppedImage={this.state.droppedImage}
+          imageLink={this.state.imageLink}
           loading={this.state.loading}
           onDropAccepted={this.onDropAccepted}
           onResetImage={this.onResetImage}
+          onLinkChange={this.onLinkChange}
+          onLinkSubmit={this.onLinkSubmit}
           processedImage={this.state.processedImage}
         />
       );
@@ -89,6 +95,42 @@ class Home extends React.Component {
       loading: false,
       processedImage: '',
     });
+  }
+
+  onLinkChange(event) {
+    let link = event.target.value;
+    this.setState({
+      imageLink: link,
+    });
+  }
+
+  onLinkSubmit() {
+    // TODO: disable button, spinner, send request
+    console.log(this.state.imageLink);
+    // sendLinkUploadRequest();
+  }
+
+  sendLinkUploadRequest() {
+    setTimeout(() => {
+      this.request = request.post('/upload')
+        .timeout({
+          deadline: 60000,
+        })
+        .end(this.onLinkUploadResponse);
+    }, 100);
+  }
+
+  onLinkUploadResponse(error, result) {
+    if (error || !result.ok) {
+      console.log(error);
+      // TODO: enable button, remove spinner, add error, show form invalid
+    } else {
+      this.setState({
+        loading: false,
+        processedImage: result.text,
+      });
+      this.sendCaptionRequest();
+    }
   }
 
   sendCaptionRequest() {
