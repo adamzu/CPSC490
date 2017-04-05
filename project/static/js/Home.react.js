@@ -31,6 +31,8 @@ class Home extends React.Component {
     };
   }
 
+  // TODO: fix caption request bug
+
   handleSelect(eventKey) {
     this.setState({
       activeTabKey: eventKey,
