@@ -44,7 +44,8 @@ class ProcessedImage():
         try:
             return {
                 ExifTags.TAGS[k]: v
-                for k, v in self.PIL_image._getexif().items() if k in ExifTags.TAGS
+                for k, v in self.PIL_image._getexif().items() \
+                if k in ExifTags.TAGS
             }
         except (AttributeError, IndexError, KeyError):
             return False
@@ -67,20 +68,22 @@ class ProcessedImage():
         self.PIL_image.save(image_file, 'JPEG')
         output = None
         try:
-            output = subprocess.check_output([IM2TXT_SCRIPT, image_file.name]).decode('utf-8')
+            output = subprocess.check_output(
+                [IM2TXT_SCRIPT, image_file.name]
+            ).decode('utf-8')
         except (CalledProcessError, OSError):
             pass
         image_file.close()
         return output
 
+    # Example - sanitize the following:
+    #     Captions for image test.jpg:
+    #       0) a little girl sitting in front of a birthday cake . (p=0.000078)
+    #       1) a little girl is holding a teddy bear . (p=0.000062)
+    #       2) a little girl sitting in front of a cake . (p=0.000044)
+    # to this:
+    #     A little girl sitting in front of a birthday cake
     def _get_sanitized_caption(self, output):
-        # Example - sanitize the following:
-        #     Captions for image test.jpg:
-        #       0) a little girl sitting in front of a birthday cake . (p=0.000078)
-        #       1) a little girl is holding a teddy bear . (p=0.000062)
-        #       2) a little girl sitting in front of a cake . (p=0.000044)
-        # to this:
-        #     A little girl sitting in front of a birthday cake
         if not output:
             return None
         tokens = output.split('\n')[1].strip().split()
