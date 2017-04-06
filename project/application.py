@@ -11,7 +11,6 @@ Session(app)
 
 @app.route('/')
 def index():
-    session.clear()
     return render_template('index.html')
 
 @app.route('/upload', methods=['POST'])
@@ -24,9 +23,15 @@ def upload():
         )
     return session['image'].get_base64_string()
 
+@app.route('/reset', methods=['POST'])
+def reset():
+    session.clear()
+    return ''
+
 @app.route('/caption', methods=['POST'])
 def caption():
-    return session['image'].get_caption()
+    caption = session['image'].get_caption()
+    return caption
 
 if __name__ == '__main__':
     app.run()

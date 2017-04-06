@@ -14,8 +14,8 @@ class Home extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.onCaptionResponse = this.onCaptionResponse.bind(this);
     this.onDropAccepted = this.onDropAccepted.bind(this);
-    this.onLinkChange=this.onLinkChange.bind(this);
-    this.onLinkSubmit=this.onLinkSubmit.bind(this);
+    this.onLinkChange = this.onLinkChange.bind(this);
+    this.onLinkSubmit = this.onLinkSubmit.bind(this);
     this.onLinkUploadResponse = this.onLinkUploadResponse.bind(this);
     this.onResetImage = this.onResetImage.bind(this);
     this.onUploadResponse = this.onUploadResponse.bind(this);
@@ -30,8 +30,6 @@ class Home extends React.Component {
       processedImage: '',
     };
   }
-
-  // TODO: fix caption request bug
 
   handleSelect(eventKey) {
     this.setState({
@@ -84,6 +82,17 @@ class Home extends React.Component {
       loading: false,
       processedImage: ''
     });
+    this.sendResetRequest();
+  }
+
+  sendResetRequest() {
+    setTimeout(() => {
+      this.request = request.post('/reset')
+        .timeout({
+          deadline: 60000,
+        })
+        .end();
+    }, 100);
   }
 
   onLinkChange(event) {
