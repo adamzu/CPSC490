@@ -103,7 +103,8 @@ class Home extends React.Component {
     });
   }
 
-  onLinkSubmit() {
+  onLinkSubmit(event) {
+    event.preventDefault();
     this.setState({
       image: {},
       loading: true,

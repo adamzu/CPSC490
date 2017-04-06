@@ -1,7 +1,7 @@
 const React = require('react');
 const Spinner = require('Spinner.react');
 
-import { Button, Form, FormControl, FormGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button, FormControl, FormGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 
 const VALID_LINK_REGEX = new RegExp(
@@ -32,7 +32,7 @@ class ImageLinkAccepter extends React.Component {
     return (
       <div className="accepter-container">
         or<br />
-        <Form>
+        <form id="url-form" onSubmit={this.props.onLinkSubmit}>
           <strong>Provide a direct link to an image on the web</strong><br/>
           <FormGroup
             className="accepter"
@@ -52,12 +52,12 @@ class ImageLinkAccepter extends React.Component {
             <FormControl.Feedback />
             <Button
               disabled={this.isInvalidLink() || this.props.isInvalidImageLink}
-              onClick={this.props.onLinkSubmit}
+              type='submit'
             >
               Get Caption
             </Button>
           </FormGroup>
-        </Form>
+        </form>
       </div>
     );
   }
