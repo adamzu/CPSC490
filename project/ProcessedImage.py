@@ -71,7 +71,7 @@ class ProcessedImage():
             output = subprocess.check_output(
                 [IM2TXT_SCRIPT, image_file.name]
             ).decode('utf-8')
-        except (CalledProcessError, OSError):
+        except (subprocess.CalledProcessError, OSError):
             pass
         image_file.close()
         return output

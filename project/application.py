@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, jsonify, render_template, request, session
 from flask_session import Session
 from tempfile import gettempdir
-from ProcessedImage import ProcessedImage
+from ProcessedImage import InvalidImageException, ProcessedImage
 
 app = Flask(__name__)
 app.config['SESSION_FILE_DIR'] = gettempdir()
@@ -15,12 +15,15 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    if request.files:
-        session['image'] = ProcessedImage(image_file=request.files['image'])
-    else:
-        session['image'] = ProcessedImage(
-            image_url=request.get_json()['image_url']
-        )
+    try:
+        if request.files:
+            session['image'] = ProcessedImage(image_file=request.files['image'])
+        else:
+            session['image'] = ProcessedImage(
+                image_url=request.get_json()['image_url']
+            )
+    except InvalidImageException as e:
+        return str(e), 500
     return session['image'].get_base64_string()
 
 @app.route('/reset', methods=['POST'])
