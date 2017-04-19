@@ -1,6 +1,6 @@
 .DS_Store
 __pycache__
-api_keys.py
+config.py
 bazel-*
 bundle.js
 model
