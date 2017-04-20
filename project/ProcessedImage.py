@@ -69,6 +69,14 @@ class ProcessedImage():
         return 'data:image/jpeg;base64,' \
             + base64.b64encode(self._get_raw_data().getvalue()).decode('utf-8')
 
+    def _get_clarifai_output(self, file_name):
+        response = self.clarifaiApp.tag_files([file_name])
+        for output in response['outputs']:
+            concepts = output['data']['concepts']
+            for concept in concepts:
+                print(concept)
+            print()
+
     def _get_im2txt_output(self):
         image_file = NamedTemporaryFile()
         self.PIL_image.save(image_file, 'JPEG')
@@ -79,14 +87,8 @@ class ProcessedImage():
             ).decode('utf-8')
         except (subprocess.CalledProcessError, OSError):
             pass
-
-        response = self.clarifaiApp.tag_files([image_file])
-        for output in response['outputs']:
-            concepts = output['data']['concepts']
-            for concept in concepts:
-                print(concept)
-            print()
-
+        # TODO: add more to clarifai stuff
+        self._get_clarifai_output(image_file.name)
         image_file.close()
         return output
 
