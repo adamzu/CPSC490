@@ -1,6 +1,7 @@
 const DocumentViewer = require('DocumentViewer.react');
 const ImageCaptioner = require('ImageCaptioner.react');
 const React = require('react');
+const SocketIO = require('socket.io-client');
 const Toolbar = require('Toolbar.react');
 
 import request from 'superagent';
@@ -20,6 +21,7 @@ class Home extends React.Component {
     this.onResetImage = this.onResetImage.bind(this);
     this.onUploadResponse = this.onUploadResponse.bind(this);
     this.request = null;
+    this.socket = SocketIO();
     this.state = {
       activeTabKey: 0,
       caption: '',
@@ -82,6 +84,7 @@ class Home extends React.Component {
       loading: false,
       processedImage: ''
     });
+    // TODO: emit(reset)
     this.sendResetRequest();
   }
 
@@ -141,23 +144,17 @@ class Home extends React.Component {
   }
 
   sendCaptionRequest() {
-    setTimeout(() => {
-      this.request = request.post('/caption')
-        .timeout({
-          deadline: 60000,
-        })
-        .end(this.onCaptionResponse);
-    }, 100);
+    this.socket.emit('caption');
   }
 
-  onCaptionResponse(error, result) {
-    if (error || !result.ok) {
-      console.log(error);
-    } else {
-      this.setState({
-        caption: result.text,
-      });
-    }
+  onCaptionResponse(result) {
+    this.setState({
+      caption: result,
+    });
+  }
+
+  componentDidMount() {
+    this.socket.on('caption', this.onCaptionResponse);
   }
 
   componentWillUnmount() {

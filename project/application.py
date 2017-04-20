@@ -33,10 +33,9 @@ def reset():
     session.clear()
     return ''
 
-@app.route('/caption', methods=['POST'])
+@socketio.on('caption')
 def caption():
-    caption = session['image'].get_caption()
-    return caption
+    emit('caption', session['image'].get_caption())
 
 if __name__ == '__main__':
     socketio.run(app)
