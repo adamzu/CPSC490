@@ -27,6 +27,7 @@ class ProcessedImage():
         )
         self.PIL_image = self._get_PIL_image(image_file, image_url)
         self.exif = self._get_exif_data()
+        self.caption_process = None
         self._orient_image()
 
     def _get_PIL_image(self, image_file, image_url):
@@ -86,13 +87,20 @@ class ProcessedImage():
         self.PIL_image.save(image_file, 'JPEG')
         output = None
         try:
-            output = subprocess.check_output(
-                [IM2TXT_SCRIPT, image_file.name]
-            ).decode('utf-8')
+            # TODO: added threaded abort: http://stackoverflow.com/questions/39689975/asynchronous-subprocess-popen-python-3-5
+            # output = subprocess.check_output(
+            #     [IM2TXT_SCRIPT, image_file.name]
+            # ).decode('utf-8')
+            self.caption_process = subprocess.Popen(
+                [IM2TXT_SCRIPT, image_file.name],
+                stdout=subprocess.PIPE
+            )
+            output = self.caption_process.stdout.read().decode('utf-8')
         except (subprocess.CalledProcessError, OSError):
             pass
         # TODO: add more to clarifai stuff
         self._get_clarifai_output(image_file.name)
+        self.caption_process = None
         image_file.close()
         return output
 
@@ -127,4 +135,5 @@ class ProcessedImage():
 
     def abort_captioning(self):
         # TODO: kill process
-        pass
+        if self.caption_process:
+            self.caption_process.kill()
