@@ -29,6 +29,7 @@
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.11.0",
     "react-pdf": "1.6.1",
+    "socket.io": "1.7.3",
     "superagent": "3.5.1"
   }
 }
