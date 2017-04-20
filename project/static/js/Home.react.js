@@ -13,7 +13,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
-    this.onCaptionResponse = this.onCaptionResponse.bind(this);
+    this._onCaptionResponse = this._onCaptionResponse.bind(this);
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.onLinkChange = this.onLinkChange.bind(this);
     this.onLinkSubmit = this.onLinkSubmit.bind(this);
@@ -84,18 +84,11 @@ class Home extends React.Component {
       loading: false,
       processedImage: ''
     });
-    // TODO: emit(reset)
     this.sendResetRequest();
   }
 
   sendResetRequest() {
-    setTimeout(() => {
-      this.request = request.post('/reset')
-        .timeout({
-          deadline: 60000,
-        })
-        .end();
-    }, 100);
+    this.socket.emit('reset');
   }
 
   onLinkChange(event) {
@@ -147,14 +140,14 @@ class Home extends React.Component {
     this.socket.emit('caption');
   }
 
-  onCaptionResponse(result) {
+  _onCaptionResponse(result) {
     this.setState({
       caption: result,
     });
   }
 
   componentDidMount() {
-    this.socket.on('caption', this.onCaptionResponse);
+    this.socket.on('caption', this._onCaptionResponse);
   }
 
   componentWillUnmount() {

@@ -28,10 +28,10 @@ def upload():
         return str(e), 500
     return session['image'].get_base64_string()
 
-@app.route('/reset', methods=['POST'])
+@socketio.on('reset')
 def reset():
     session.clear()
-    return ''
+    # TODO: abort process and emit('reset')
 
 @socketio.on('caption')
 def caption():
