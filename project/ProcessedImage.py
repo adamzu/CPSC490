@@ -1,9 +1,11 @@
+from clarifai.rest import ClarifaiApp
 from io import BytesIO
+from nltk.corpus import wordnet as wn
 from PIL import ExifTags, Image
 from tempfile import NamedTemporaryFile
 
-import api_keys
 import base64
+import config
 import random
 import requests
 import subprocess
@@ -19,6 +21,10 @@ class InvalidImageException(Exception):
 
 class ProcessedImage():
     def __init__(self, image_file=None, image_url=None):
+        self.clarifaiApp = ClarifaiApp(
+            app_id=config.CLARIFAI_APP_ID,
+            app_secret=config.CLARIFAI_APP_SECRET
+        )
         self.PIL_image = None
         if image_file:
             self.PIL_image = Image.open(image_file)
@@ -73,6 +79,14 @@ class ProcessedImage():
             ).decode('utf-8')
         except (subprocess.CalledProcessError, OSError):
             pass
+
+        response = self.clarifaiApp.tag_files([image_file])
+        for output in response['outputs']:
+            concepts = output['data']['concepts']
+            for concept in concepts:
+                print(concept)
+            print()
+
         image_file.close()
         return output
 
