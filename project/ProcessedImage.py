@@ -25,20 +25,24 @@ class ProcessedImage():
             app_id=config.CLARIFAI_APP_ID,
             app_secret=config.CLARIFAI_APP_SECRET
         )
-        self.PIL_image = None
+        self.PIL_image = self._get_PIL_image(image_file, image_url)
+        self.exif = self._get_exif_data()
+        self._orient_image()
+
+    def _get_PIL_image(self, image_file, image_url):
+        PIL_image = None
         if image_file:
-            self.PIL_image = Image.open(image_file)
+            PIL_image = Image.open(image_file)
         elif image_url:
             try:
-                self.PIL_image = Image.open(
+                PIL_image = Image.open(
                     BytesIO(requests.get(image_url).content)
                 )
             except (OSError, requests.RequestException):
                 raise InvalidImageException('Invalid image URL')
         else:
             raise InvalidImageException('No parameters supplied')
-        self.exif = self._get_exif_data()
-        self._orient_image()
+        return PIL_image
 
     def _get_raw_data(self):
         image_io = BytesIO()
@@ -120,3 +124,7 @@ class ProcessedImage():
             return 'Sorry, I couldn\'t generate a caption for this image...'
         caption = self._get_post_processed_caption(caption)
         return caption
+
+    def abort_captioning(self):
+        # TODO: kill process
+        pass
