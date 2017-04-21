@@ -30,9 +30,7 @@ def upload():
 
 @socketio.on('reset')
 def reset():
-    session['image'].abort_captioning()
     session.clear()
-    # TODO: abort process and emit('reset')
 
 @socketio.on('caption')
 def caption():

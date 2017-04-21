@@ -72,7 +72,7 @@ class ProcessedImage():
 
     def get_base64_string(self):
         return 'data:image/jpeg;base64,' \
-            + base64.b64encode(self._get_raw_data().getvalue()).decode('utf-8')
+            + base64.b64encode(self._get_raw_data().getvalue()).decode()
 
     def _get_clarifai_output(self, file_name):
         response = self.clarifaiApp.tag_files([file_name])
@@ -87,20 +87,13 @@ class ProcessedImage():
         self.PIL_image.save(image_file, 'JPEG')
         output = None
         try:
-            # TODO: added threaded abort: http://stackoverflow.com/questions/39689975/asynchronous-subprocess-popen-python-3-5
-            # output = subprocess.check_output(
-            #     [IM2TXT_SCRIPT, image_file.name]
-            # ).decode('utf-8')
-            self.caption_process = subprocess.Popen(
-                [IM2TXT_SCRIPT, image_file.name],
-                stdout=subprocess.PIPE
-            )
-            output = self.caption_process.stdout.read().decode('utf-8')
+            output = subprocess.check_output(
+                [IM2TXT_SCRIPT, image_file.name]
+            ).decode()
         except (subprocess.CalledProcessError, OSError):
             pass
         # TODO: add more to clarifai stuff
         self._get_clarifai_output(image_file.name)
-        self.caption_process = None
         image_file.close()
         return output
 
@@ -132,8 +125,4 @@ class ProcessedImage():
             return 'Sorry, I couldn\'t generate a caption for this image...'
         caption = self._get_post_processed_caption(caption)
         return caption
-
-    def abort_captioning(self):
-        # TODO: kill process
-        if self.caption_process:
-            self.caption_process.kill()
+        

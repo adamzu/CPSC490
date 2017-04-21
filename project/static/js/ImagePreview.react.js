@@ -14,13 +14,11 @@ class ImagePreview extends React.Component {
           this.props.loading
             ? <Spinner />
             : <div className="thumbnail-container">
-                {/* TODO: remove */}
-                {/* {
+                {
                   this.props.caption === ''
                     ? null
                     : <ImageResetButton onResetImage={this.props.onResetImage} />
-                } */}
-                <ImageResetButton onResetImage={this.props.onResetImage} />
+                }
                 <Thumbnail src={this.props.src}>
                   <ImageCaption caption={this.props.caption} />
                 </Thumbnail>
