@@ -10,8 +10,8 @@ class DocumentViewer extends React.Component {
     this.onDocumentError = this.onDocumentError.bind(this);
     this.onDocumentLoad = this.onDocumentLoad.bind(this);
     this.state = {
-      currentPageIndex: 0,
       currentPage: 1,
+      currentPageIndex: 0,
       totalPages: 0,
       width: 0,
     };
@@ -26,6 +26,8 @@ class DocumentViewer extends React.Component {
 
   onDocumentLoad({total}) {
     this.setState({
+      currentPage: 1,
+      currentPageIndex: 0,
       totalPages: total,
     });
   }
@@ -38,8 +40,8 @@ class DocumentViewer extends React.Component {
 
   handleSelect(eventKey) {
     this.setState({
-      currentPageIndex: eventKey - 1,
       currentPage: eventKey,
+      currentPageIndex: eventKey - 1,
     });
   }
 
@@ -60,10 +62,10 @@ class DocumentViewer extends React.Component {
         }
         <div className="pane" id="pane">
           <DocumentViewerPane
+            currentPageIndex={this.state.currentPageIndex}
             file={this.props.file}
             onDocumentError={this.onDocumentError}
             onDocumentLoad={this.onDocumentLoad}
-            currentPageIndex={this.state.currentPageIndex}
             width={this.state.width}
           />
         </div>
