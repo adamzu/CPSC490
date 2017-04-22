@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, render_template, request, session
 from flask_session import Session
-from flask_socketio import SocketIO, emit
 from tempfile import gettempdir
 from ProcessedImage import InvalidImageException, ProcessedImage
 
@@ -9,7 +8,6 @@ app.config['SESSION_FILE_DIR'] = gettempdir()
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
-socketio = SocketIO(app)
 
 @app.route('/')
 def index():
@@ -28,13 +26,15 @@ def upload():
         return str(e), 500
     return session['image'].get_base64_string()
 
-@socketio.on('reset')
+@app.route('/reset', methods=['POST'])
 def reset():
     session.clear()
+    return ''
 
-@socketio.on('caption')
+@app.route('/caption', methods=['POST'])
 def caption():
-    emit('caption', session['image'].get_caption())
+    caption = session['image'].get_caption()
+    return caption
 
 if __name__ == '__main__':
-    socketio.run(app)
+    app.run()

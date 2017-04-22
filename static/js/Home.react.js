@@ -1,7 +1,6 @@
 const DocumentViewer = require('DocumentViewer.react');
 const ImageCaptioner = require('ImageCaptioner.react');
 const React = require('react');
-const SocketIO = require('socket.io-client');
 const Toolbar = require('Toolbar.react');
 
 import request from 'superagent';
@@ -13,7 +12,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
-    this._onCaptionResponse = this._onCaptionResponse.bind(this);
+    this.onCaptionResponse = this.onCaptionResponse.bind(this);
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.onLinkChange = this.onLinkChange.bind(this);
     this.onLinkSubmit = this.onLinkSubmit.bind(this);
@@ -21,7 +20,6 @@ class Home extends React.Component {
     this.onResetImage = this.onResetImage.bind(this);
     this.onUploadResponse = this.onUploadResponse.bind(this);
     this.request = null;
-    this.socket = SocketIO();
     this.state = {
       activeTabKey: 0,
       caption: '',
@@ -88,7 +86,13 @@ class Home extends React.Component {
   }
 
   sendResetRequest() {
-    this.socket.emit('reset');
+    setTimeout(() => {
+      this.request = request.post('/reset')
+        .timeout({
+          deadline: 60000,
+        })
+        .end();
+    }, 100);
   }
 
   onLinkChange(event) {
@@ -137,17 +141,23 @@ class Home extends React.Component {
   }
 
   sendCaptionRequest() {
-    this.socket.emit('caption');
+    setTimeout(() => {
+      this.request = request.post('/caption')
+        .timeout({
+          deadline: 60000,
+        })
+        .end(this.onCaptionResponse);
+    }, 100);
   }
 
-  _onCaptionResponse(result) {
-    this.setState({
-      caption: result,
-    });
-  }
-
-  componentDidMount() {
-    this.socket.on('caption', this._onCaptionResponse);
+  onCaptionResponse(error, result) {
+    if (error || !result.ok) {
+      console.log(error);
+    } else {
+      this.setState({
+        caption: result.text,
+      });
+    }
   }
 
   componentWillUnmount() {
