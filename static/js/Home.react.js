@@ -12,13 +12,13 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
-    this.onCaptionResponse = this.onCaptionResponse.bind(this);
+    this._onCaptionResponse = this._onCaptionResponse.bind(this);
     this.onDropAccepted = this.onDropAccepted.bind(this);
     this.onLinkChange = this.onLinkChange.bind(this);
     this.onLinkSubmit = this.onLinkSubmit.bind(this);
-    this.onLinkUploadResponse = this.onLinkUploadResponse.bind(this);
+    this._onLinkUploadResponse = this._onLinkUploadResponse.bind(this);
     this.onResetImage = this.onResetImage.bind(this);
-    this.onUploadResponse = this.onUploadResponse.bind(this);
+    this._onUploadResponse = this._onUploadResponse.bind(this);
     this.request = null;
     this.state = {
       activeTabKey: 0,
@@ -53,11 +53,11 @@ class Home extends React.Component {
         .timeout({
           deadline: 60000,
         })
-        .end(this.onUploadResponse);
+        .end(this._onUploadResponse);
     }, 100);
   }
 
-  onUploadResponse(error, result) {
+  _onUploadResponse(error, result) {
     if (error || !result.ok) {
       console.log(error);
       this.setState({
@@ -119,11 +119,11 @@ class Home extends React.Component {
         .timeout({
           deadline: 60000,
         })
-        .end(this.onLinkUploadResponse);
+        .end(this._onLinkUploadResponse);
     }, 100);
   }
 
-  onLinkUploadResponse(error, result) {
+  _onLinkUploadResponse(error, result) {
     if (error || !result.ok) {
       console.log(error);
       this.setState({
@@ -146,11 +146,11 @@ class Home extends React.Component {
         .timeout({
           deadline: 60000,
         })
-        .end(this.onCaptionResponse);
+        .end(this._onCaptionResponse);
     }, 100);
   }
 
-  onCaptionResponse(error, result) {
+  _onCaptionResponse(error, result) {
     if (error || !result.ok) {
       console.log(error);
     } else {
