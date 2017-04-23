@@ -82,19 +82,14 @@ class ProcessedImage():
                 print(concept)
             print()
 
-    def _get_im2txt_output(self):
-        image_file = NamedTemporaryFile()
-        self.PIL_image.save(image_file, 'JPEG')
+    def _get_im2txt_output(self, file_name):
         output = None
         try:
             output = subprocess.check_output(
-                [IM2TXT_SCRIPT, image_file.name]
+                [IM2TXT_SCRIPT, file_name]
             ).decode()
         except (subprocess.CalledProcessError, OSError):
             pass
-        # TODO: add more to clarifai stuff
-        self._get_clarifai_output(image_file.name)
-        image_file.close()
         return output
 
     # Example - sanitize the following:
@@ -115,14 +110,21 @@ class ProcessedImage():
         caption = ' '.join(tokens)
         return caption
 
-    def _get_post_processed_caption(self, caption):
-        # TODO: add metadata analysis/nltk stuff here
+    def _get_post_processed_caption(self, caption, file_name):
+        self._get_clarifai_output(file_name)
         return caption
 
     def get_caption(self):
-        caption = self._get_sanitized_caption(self._get_im2txt_output())
+        image_file = NamedTemporaryFile()
+        file_name = image_file.name
+        self.PIL_image.save(image_file, 'JPEG')
+        caption = self._get_sanitized_caption(
+            self._get_im2txt_output(file_name)
+        )
         if not caption:
-            return 'Sorry, I couldn\'t generate a caption for this image...'
-        caption = self._get_post_processed_caption(caption)
+            # TODO: uncomment below
+            # return 'Sorry, I couldn\'t generate a caption for this image...'
+            caption = 'Sorry, I couldn\'t generate a caption for this image...'
+        caption = self._get_post_processed_caption(caption, file_name)
+        image_file.close()
         return caption
-        
