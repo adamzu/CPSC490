@@ -2,14 +2,17 @@ from clarifai.rest import ClarifaiApp
 from io import BytesIO
 from nltk.corpus import wordnet as wn
 from PIL import ExifTags, Image
+from string import punctuation as PUNCTUATION
 from tempfile import NamedTemporaryFile
 
 import base64
 import config
+import nltk
 import random
 import requests
 import subprocess
 
+nltk.data.path.append('./nltk_data/')
 IM2TXT_SCRIPT = './generate-caption.sh'
 
 class InvalidImageException(Exception):
@@ -75,12 +78,8 @@ class ProcessedImage():
             + base64.b64encode(self._get_raw_data().getvalue()).decode()
 
     def _get_clarifai_output(self, file_name):
-        response = self.clarifaiApp.tag_files([file_name])
-        for output in response['outputs']:
-            concepts = output['data']['concepts']
-            for concept in concepts:
-                print(concept)
-            print()
+        output = self.clarifaiApp.tag_files([file_name])['outputs'][0]
+        return [concept for concept in output['data']['concepts']]
 
     def _get_im2txt_output(self, file_name):
         output = None
@@ -110,9 +109,21 @@ class ProcessedImage():
         caption = ' '.join(tokens)
         return caption
 
+    def _detokenize(self, tokens):
+        return ''.join(
+            [' ' + token \
+                if "'" not in token and token not in PUNCTUATION \
+                else token for token in tokens \
+            ]
+        ).strip()
+
     def _get_post_processed_caption(self, caption, file_name):
-        self._get_clarifai_output(file_name)
-        return caption
+        concepts = self._get_clarifai_output(file_name)
+        new_caption_tokens = []
+        for token in nltk.word_tokenize(caption):
+            new_caption_tokens.append(token)
+        print(concepts)
+        return self._detokenize(new_caption_tokens)
 
     def get_caption(self):
         image_file = NamedTemporaryFile()
