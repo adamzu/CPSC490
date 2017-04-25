@@ -1,3 +1,4 @@
+from capgen import config
 from clarifai.rest import ClarifaiApp
 from io import BytesIO
 from nltk.corpus import wordnet as wn
@@ -6,11 +7,12 @@ from string import punctuation as PUNCTUATION
 from tempfile import NamedTemporaryFile
 
 import base64
-from capgen import config
 import nltk
 import random
 import requests
 import subprocess
+
+import os
 
 nltk.data.path.append('./nltk_data/')
 IM2TXT_SCRIPT = './generate-caption.sh'
@@ -87,8 +89,8 @@ class ProcessedImage():
             output = subprocess.check_output(
                 [IM2TXT_SCRIPT, file_name]
             ).decode()
-        except (subprocess.CalledProcessError, OSError):
-            pass
+        except (subprocess.CalledProcessError, OSError) as e:
+            print(e)
         return output
 
     # Example - sanitize the following:
