@@ -1,7 +1,7 @@
 from capgen import config
 from clarifai.rest import ClarifaiApp
 from io import BytesIO
-from nltk.corpus import wordnet as wn
+from nltk.corpus import wordnet
 from PIL import ExifTags, Image
 from string import punctuation as PUNCTUATION
 from tempfile import NamedTemporaryFile
@@ -79,10 +79,6 @@ class ProcessedImage():
         return 'data:image/jpeg;base64,' \
             + base64.b64encode(self._get_raw_data().getvalue()).decode()
 
-    def _get_clarifai_output(self, file_name):
-        output = self.clarifaiApp.tag_files([file_name])['outputs'][0]
-        return [concept for concept in output['data']['concepts']]
-
     def _get_im2txt_output(self, file_name):
         output = None
         try:
@@ -111,6 +107,10 @@ class ProcessedImage():
         caption = ' '.join(tokens)
         return caption
 
+    def _get_clarifai_concepts(self, file_name):
+        output = self.clarifaiApp.tag_files([file_name])['outputs'][0]
+        return [concept for concept in output['data']['concepts']]
+
     def _detokenize(self, tokens):
         return ''.join(
             [' ' + token \
@@ -119,11 +119,17 @@ class ProcessedImage():
             ]
         ).strip()
 
+    def _get_hyponym(self, token, concepts):
+        hyponym = token
+        for concept in concepts:
+            pass
+        return hyponym
+
     def _get_post_processed_caption(self, caption, file_name):
-        concepts = self._get_clarifai_output(file_name)
+        concepts = self._get_clarifai_concepts(file_name)
         new_caption_tokens = []
         for token in nltk.word_tokenize(caption):
-            new_caption_tokens.append(token)
+            new_caption_tokens.append(self._get_hyponym(token, concepts))
         print(concepts)
         return self._detokenize(new_caption_tokens)
 
