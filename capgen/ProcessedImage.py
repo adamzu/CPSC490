@@ -6,7 +6,7 @@ from string import punctuation as PUNCTUATION
 from tempfile import NamedTemporaryFile
 
 import base64
-import config
+from capgen import config
 import nltk
 import random
 import requests
