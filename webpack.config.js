@@ -3,10 +3,10 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: [
-    "./static/js/application.js",
+    "./capgen/static/js/application.js",
   ],
   output: {
-    path: __dirname + '/static/js/',
+    path: __dirname + '/capgen/static/js/',
     filename: "bundle.js",
   },
   module: {
@@ -24,7 +24,7 @@ module.exports = {
   plugins: [],
   resolve: {
     modules: [
-      path.resolve('./static/js/'),
+      path.resolve('./capgen/static/js/'),
       path.resolve('./node_modules/'),
     ]
   },

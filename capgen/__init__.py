@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, render_template, request, session
 from flask_session import Session
 from tempfile import gettempdir
-from ProcessedImage import InvalidImageException, ProcessedImage
+# from ProcessedImage import InvalidImageException, ProcessedImage
+from capgen.ProcessedImage import InvalidImageException, ProcessedImage
 
 app = Flask(__name__)
 app.config['SESSION_FILE_DIR'] = gettempdir()
