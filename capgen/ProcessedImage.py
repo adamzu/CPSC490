@@ -2,6 +2,7 @@ from capgen import config
 from clarifai.rest import ClarifaiApp
 from io import BytesIO
 from nltk.corpus import wordnet
+# from nltk.tag import pos_tag
 from PIL import ExifTags, Image
 from string import punctuation as PUNCTUATION
 from tempfile import NamedTemporaryFile
@@ -128,7 +129,9 @@ class ProcessedImage():
     def _get_post_processed_caption(self, caption, file_name):
         concepts = self._get_clarifai_concepts(file_name)
         new_caption_tokens = []
-        for token in nltk.word_tokenize(caption):
+        tokens = nltk.word_tokenize(caption)
+        print(nltk.pos_tag(tokens, tagset='universal'))
+        for token in tokens:
             new_caption_tokens.append(self._get_hyponym(token, concepts))
         print(concepts)
         return self._detokenize(new_caption_tokens)
