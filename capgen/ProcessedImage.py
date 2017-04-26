@@ -119,18 +119,21 @@ class ProcessedImage():
             ]
         ).strip()
 
-    def _get_hyponym(self, token, concepts):
-        synsets = wn.synsets(token, pos=wn.NOUN)
-        if synsets:
-            hyponyms = set()
-            for synset in synsets:
-                for hyponym_synset in synset.hyponyms():
-                    for lemma in hyponym_synset.lemmas():
-                        hyponyms.add(lemma.name().replace('_', ' '))
-            for concept in concepts:
-                if concept['name'] != token and concept['name'] in hyponyms:
-                    return concept['name']
-        return token
+    def _get_hyponyms(self, noun):
+        hyponyms = set()
+        synsets = wn.synsets(noun, pos=wn.NOUN)
+        for synset in synsets:
+            for hyponym_synset in synset.hyponyms():
+                for lemma in hyponym_synset.lemmas():
+                    hyponyms.add(lemma.name().replace('_', ' '))
+        return hyponyms
+
+    def _get_replaced_noun(self, noun, concepts):
+        hyponyms = self._get_hyponyms(noun)
+        for concept in concepts:
+            if concept['name'] != noun and concept['name'] in hyponyms:
+                return concept['name']
+        return noun
 
     def _get_post_processed_caption(self, caption, file_name):
         concepts = self._get_clarifai_concepts(file_name)
@@ -142,7 +145,7 @@ class ProcessedImage():
         for token, pos in tagged_tokens:
             new_caption_token = token
             if pos == 'NOUN':
-                new_caption_token = self._get_hyponym(token, concepts)
+                new_caption_token = self._get_replaced_noun(token, concepts)
             new_caption_tokens.append(new_caption_token)
         return self._detokenize(new_caption_tokens)
 
@@ -150,11 +153,13 @@ class ProcessedImage():
         image_file = NamedTemporaryFile()
         file_name = image_file.name
         self.PIL_image.save(image_file, 'JPEG')
-        caption = self._get_sanitized_caption(
-            self._get_im2txt_output(file_name)
-        )
+        # TODO: toggle comments below
+        # caption = self._get_sanitized_caption(
+        #     self._get_im2txt_output(file_name)
+        # )
+        caption = 'A person sitting in front of a plate of food'
         if not caption:
-            # TODO: uncomment below
+            # TODO: toggle comments below
             # return 'Sorry, I couldn\'t generate a caption for this image...'
             caption = 'Sorry, I couldn\'t generate a caption for this image...'
         caption = self._get_post_processed_caption(caption, file_name)
