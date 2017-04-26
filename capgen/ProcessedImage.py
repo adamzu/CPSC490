@@ -1,8 +1,7 @@
 from capgen import config
 from clarifai.rest import ClarifaiApp
 from io import BytesIO
-from nltk.corpus import wordnet
-# from nltk.tag import pos_tag
+from nltk.corpus import wordnet as wn
 from PIL import ExifTags, Image
 from string import punctuation as PUNCTUATION
 from tempfile import NamedTemporaryFile
@@ -121,19 +120,30 @@ class ProcessedImage():
         ).strip()
 
     def _get_hyponym(self, token, concepts):
-        hyponym = token
-        for concept in concepts:
-            pass
-        return hyponym
+        synsets = wn.synsets(token, pos=wn.NOUN)
+        if synsets:
+            hyponyms = set()
+            for synset in synsets:
+                for hyponym_synset in synset.hyponyms():
+                    for lemma in hyponym_synset.lemmas():
+                        hyponyms.add(lemma.name().replace('_', ' '))
+            for concept in concepts:
+                if concept['name'] != token and concept['name'] in hyponyms:
+                    return concept['name']
+        return token
 
     def _get_post_processed_caption(self, caption, file_name):
         concepts = self._get_clarifai_concepts(file_name)
         new_caption_tokens = []
-        tokens = nltk.word_tokenize(caption)
-        print(nltk.pos_tag(tokens, tagset='universal'))
-        for token in tokens:
-            new_caption_tokens.append(self._get_hyponym(token, concepts))
-        print(concepts)
+        tagged_tokens = nltk.pos_tag(
+            nltk.word_tokenize(caption),
+            tagset='universal'
+        )
+        for token, pos in tagged_tokens:
+            new_caption_token = token
+            if pos == 'NOUN':
+                new_caption_token = self._get_hyponym(token, concepts)
+            new_caption_tokens.append(new_caption_token)
         return self._detokenize(new_caption_tokens)
 
     def get_caption(self):
