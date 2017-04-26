@@ -1,7 +1,6 @@
 from capgen import config
 from clarifai.rest import ClarifaiApp
 from nltk.corpus import wordnet as wn
-from PIL import Image
 from string import punctuation as PUNCTUATION
 from tempfile import NamedTemporaryFile
 
@@ -99,9 +98,7 @@ class ImageCaptioner():
         # )
         caption = 'A person sitting in front of a plate of food'
         if not caption:
-            # TODO: toggle comments below
-            # return 'Sorry, I couldn\'t generate a caption for this image...'
-            caption = 'Sorry, I couldn\'t generate a caption for this image...'
+            return 'Sorry, I couldn\'t generate a caption for this image...'
         caption = self._get_post_processed_caption(caption, file_name)
         image_file.close()
         return caption
