@@ -85,6 +85,18 @@ class ImageCaptioner():
             new_caption_token = token
             if pos == 'NOUN':
                 new_caption_token = self._get_replaced_noun(token, concepts)
+
+                if len(new_caption_tokens) and new_caption_token != token and (
+                    new_caption_tokens[-1].lower() == 'a' \
+                    or new_caption_tokens[-1].lower() == 'an'
+                ):
+                    article = new_caption_tokens[-1]
+                    if new_caption_token[0].lower() in 'aeiou' and article.lower() == 'a':
+                        article += 'n'
+                    elif new_caption_token[0].lower() not in 'aeiou' and article.lower() == 'an':
+                        article = article[-1]
+                    new_caption_tokens[-1] = article
+
             new_caption_tokens.append(new_caption_token)
         return self._detokenize(new_caption_tokens)
 
