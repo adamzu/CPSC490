@@ -110,13 +110,13 @@ class ImageCaptioner():
         image_file = NamedTemporaryFile()
         file_name = image_file.name
         self.PIL_image.save(image_file, 'JPEG')
-        # TODO: toggle comments below
-        # caption = self._get_sanitized_caption(
-        #     self._get_im2txt_output(file_name)
-        # )
-        caption = 'A person sitting in front of a plate of food'
+        caption = self._get_sanitized_caption(
+            self._get_im2txt_output(file_name)
+        )
         if not caption:
             return 'Sorry, I couldn\'t generate a caption for this image...'
+        print(' pre-processed: {}'.format(caption))
         caption = self._get_post_processed_caption(caption, file_name)
+        print('post-processed: {}'.format(caption))
         image_file.close()
         return caption
