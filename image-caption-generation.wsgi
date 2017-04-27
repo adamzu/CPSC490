@@ -1,6 +1,7 @@
 #!/data/clair/capgen/venv/bin/python
-import sys
-sys.path.insert(0, '/data/clair/capgen')
+import os, sys
+app_dir = os.path.dirname(__file__)
+sys.path.insert(0, app_dir)
 
 activate_this = '/data/clair/capgen/venv/bin/activate_this.py'
 with open(activate_this) as file_:
