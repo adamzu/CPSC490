@@ -66,6 +66,15 @@ class ImageCaptioner():
                 return concept['name']
         return noun
 
+    def _is_article(self, token):
+        return token.lower() == 'a' or token.lower() == 'an'
+
+    def _get_correct_article(self, noun, original_article):
+        article = original_article[0]
+        if noun[0] in 'aeiou':
+            article += 'n'
+        return article
+
     def _detokenize(self, tokens):
         return ''.join(
             [' ' + token \
@@ -85,18 +94,15 @@ class ImageCaptioner():
             new_caption_token = token
             if pos == 'NOUN':
                 new_caption_token = self._get_replaced_noun(token, concepts)
-
-                if len(new_caption_tokens) and new_caption_token != token and (
-                    new_caption_tokens[-1].lower() == 'a' \
-                    or new_caption_tokens[-1].lower() == 'an'
+                if (
+                    len(new_caption_tokens) and \
+                    new_caption_token != token and \
+                    self._is_article(new_caption_tokens[-1])
                 ):
-                    article = new_caption_tokens[-1]
-                    if new_caption_token[0].lower() in 'aeiou' and article.lower() == 'a':
-                        article += 'n'
-                    elif new_caption_token[0].lower() not in 'aeiou' and article.lower() == 'an':
-                        article = article[-1]
-                    new_caption_tokens[-1] = article
-
+                    new_caption_tokens[-1] = self._get_correct_article(
+                        new_caption_token,
+                        new_caption_tokens[-1]
+                    )
             new_caption_tokens.append(new_caption_token)
         return self._detokenize(new_caption_tokens)
 
