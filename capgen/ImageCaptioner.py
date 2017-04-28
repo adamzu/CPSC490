@@ -115,8 +115,9 @@ class ImageCaptioner():
         )
         if not caption:
             return 'Sorry, I couldn\'t generate a caption for this image...'
-        print(' pre-processed: {}'.format(caption))
-        caption = self._get_post_processed_caption(caption, file_name)
-        print('post-processed: {}'.format(caption))
+        # Uncomment here for experimental post_processing
+        # print(' pre-processed: {}'.format(caption))
+        # caption = self._get_post_processed_caption(caption, file_name)
+        # print('post-processed: {}'.format(caption))
         image_file.close()
         return caption
