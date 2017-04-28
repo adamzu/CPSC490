@@ -14,12 +14,11 @@ Ensure `python3` and `pip3` are installed. Then do the following:
 ## To run:
 In one terminal window, run `./setup.sh` or:
 
-1. `export FLASK_APP=application.py`
+1. `export FLASK_APP=capgen`
 1. `export FLASK_DEBUG=1`
 1. `source venv/bin/activate`
 1. `webpack --watch &`
-1. `cd project`
-1. `flask run`
+1. `python run.py`
 
 ## To access from ssh connection:
 While the Flask server and Webpack are running, run `lt --port=5000` in a separate terminal window (ensure [localtunnel](https://localtunnel.github.io/www/) is installed first). Then, open the returned link in your web browser. Or just use port forwarding...
