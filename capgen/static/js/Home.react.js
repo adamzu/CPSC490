@@ -5,7 +5,7 @@ const Toolbar = require('Toolbar.react');
 
 import request from 'superagent';
 
-const TABS = ['Home', 'Abstract', 'Proposal', 'Report'];
+const TABS = ['Home', 'Abstract', 'Proposal', 'Report', 'Poster'];
 
 class Home extends React.Component {
 
